@@ -1,0 +1,84 @@
+<div class="hy-view visible" data-id="login_synology" data-template-id="login_synology">
+    <div class="hy-tmpl-login_synology" id="16190758442170.4220669681218383">
+        <style type="text/css">
+            .hy-tmpl-login_synology {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center
+            }
+
+            .hy-tmpl-login_synology-form {
+                position: relative;
+                width: 100%
+            }
+
+            .hy-tmpl-login_synology-logo {
+                display: block;
+                position: relative;
+                width: 25vw;
+                height: 25vw;
+                margin: 20vw auto;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: contain
+            }
+
+            .hy-tmpl-login_synology-row {
+                margin-bottom: 1em
+            }
+        </style>
+
+<form class="hy-tmpl-login_synology-form" action="/" method="post">
+    <div class="hy-tmpl-login_synology-logo" style="background-image: url('synology.svg');"></div>
+    <div class="hy-tmpl-login_synology-row row">
+        <label class="hy-label hy-tmpl-login_synology-label" for="username">Username</label>
+        <input class="hy-input-text" name="username" type="text" value="" placeholder="Username">
+    </div>
+    <div class="hy-tmpl-login_synology-row row">
+        <label class="hy-label hy-tmpl-login_synology-label" for="password">Password</label>
+        <input class="hy-input-text" name="password" type="text" value="" placeholder="Password">
+    </div>
+
+    <div class="hy-tmpl-login_synology-row row">
+        <label class="hy-label hy-tmpl-login_synology-label" for="ipAddress">IP Address (local IP - Port 5000)</label>
+        <input class="hy-input-text" name="ipAddress" type="text" value="" placeholder="IP Address">
+    </div>
+    <div class="hy-tmpl-login_synology-row row">
+        <input class="hy-button hy-button-primary hy-button-fill hy-tmpl-login_synology-submit button" type="submit"
+            value="Inloggen">
+    </div>
+</form>
+<script type="text/javascript">!function () {
+    var e = document.getElementById("16190758442170.4220669681218383"),
+        o = e.querySelector(".hy-tmpl-login_synology-form"),
+        r = e.querySelector(".hy-tmpl-login_synology-logo"),
+        l = e.querySelector('input[name="username"]'),
+        n = e.querySelector('input[name="password"]'),
+        p = e.querySelector('input[name="ipAddress"]'),
+        m = !1; 
+        Homey.setTitle(Homey.__("$tmpl.login_credentials.title")),
+        o.addEventListener("submit", function (e) { 
+            if (e.preventDefault(), !m) { 
+                m = !0, 
+                Homey.showLoadingOverlay(Homey.__("$tmpl.login_credentials.loading")); 
+                var z = l.value, 
+                r = n.value,
+                q = p.value; 
+
+                return Homey.emit("login", { username: z, password: r, ipAddress: q }, function (e, o) { 
+                    if(e) {
+                        Homey.error(e)
+                    } else if(z) {
+                        Homey.nextView()
+                    } else {
+                        Homey.error(Homey.__("$tmpl.login_credentials.invalid_credentials"))
+                    }
+
+                    m = !1;
+                    Homey.hideLoadingOverlay();
+                })
+            }
+        });
+    }()
+</script>
