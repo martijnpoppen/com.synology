@@ -12,9 +12,7 @@
     "en": "The next step in data storage starts here",
     "nl": "De volgende stap in gegevensbeheer begint hier"
   },
-  "category": [
-    "security"
-  ],
+  "category": ["security"],
   "images": {
     "large": "/assets/images/large.jpg",
     "small": "/assets/images/small.jpg"
@@ -56,34 +54,231 @@
   "support": "https://community.athom.com/t/app-eufy-home/46610/",
   "drivers": [
     {
-        "id": "DiskStation",
-        "class": "vacuumcleaner",
-        "capabilities": [],
-        "name": {
-          "en": "Synology DiskStation",
-          "nl": "Synology DiskStation"
+      "id": "DiskStation",
+      "class": "homealarm",
+      "capabilities": [
+        "onoff",
+        "alarm_heat",
+        "measure_temperature",
+        "measure_uptime",
+        "measure_disk_usage",
+        "measure_cpu_usage"
+      ],
+      "name": {
+        "en": "Synology DiskStation",
+        "nl": "Synology DiskStation"
+      },
+      "images": {
+        "large": "drivers/DiskStation/assets/images/large.jpg",
+        "small": "drivers/DiskStation/assets/images/small.jpg"
+      },
+      "pair": [
+        {
+          "id": "login_synology"
         },
-        "images": {
-          "large": "drivers/DiskStation/assets/images/large.jpg",
-          "small": "drivers/DiskStation/assets/images/small.jpg"
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "login_synology",
+            "next": "add_devices"
+          }
         },
-        "pair": [
-            {
-              "id": "login_synology"
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "id": "mac",
+          "type": "text",
+          "label": {
+            "en": "MAC Addres",
+            "nl": "MAC Adres"
+          },
+          "value": ""
+        },
+        {
+          "id": "ip",
+          "type": "text",
+          "label": {
+            "en": "IP Address",
+            "nl": "IP Adres"
+          },
+          "value": ""
+        },
+        {
+          "id": "port",
+          "type": "number",
+          "label": {
+            "en": "Port",
+            "nl": "Port"
+          },
+          "value": 5000
+        },
+        {
+            "id": "user",
+            "type": "text",
+            "label": {
+              "en": "User",
+              "nl": "Gebruiker"
             },
-            {
-              "id": "list_devices",
-              "template": "list_devices",
-              "navigation": {
-                "prev": "login_synology",
-                "next": "add_devices"
+            "value": ""
+          },
+          {
+            "id": "passwd",
+            "type": "password",
+            "label": {
+              "en": "Password",
+              "nl": "Wachtwoord"
+            },
+            "value": ""
+          },
+        {
+          "id": "debug",
+          "type": "checkbox",
+          "label": {
+            "en": "Debug Logs",
+            "nl": "Debug Logs"
+          },
+          "value": false
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "measure_uptime": {
+      "type": "number",
+      "title": {
+        "en": "Up-Time",
+        "nl": "Online tijd"
+      },
+      "units": {
+        "en": "Hours",
+        "nl": "Uur"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Up-Time in hours",
+        "nl": "Online tijd in uren"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/stopwatch.svg",
+      "$flow": {
+        "triggers": [
+          {
+            "id": "measure_uptime_changed",
+            "title": {
+              "en": "The uptime has changed",
+              "nl": "De online tijd is veranderd"
+            },
+            "tokens": [
+              {
+                "name": "measure_uptime",
+                "title": {
+                  "en": "Up-Time",
+                  "nl": "Online tijd"
+                },
+                "type": "number",
+                "example": 99
               }
-            },
+            ]
+          }
+        ]
+      }
+    },
+    "measure_disk_usage": {
+        "type": "number",
+        "title": {
+          "en": "Disk Usage",
+          "nl": "Schijf gebruik"
+        },
+        "units": {
+          "en": "%",
+          "nl": "%"
+        },
+        "insights": true,
+        "desc": {
+          "en": "Disk Usage in %",
+          "nl": "Schijf gebruik in %"
+        },
+        "chartType": "spline",
+        "decimals": 2,
+        "getable": true,
+        "setable": false,
+        "uiComponent": "sensor",
+        "icon": "assets/icons/disc-fill.svg",
+        "$flow": {
+          "triggers": [
             {
-              "id": "add_devices",
-              "template": "add_devices"
+              "id": "measure_disk_usage_changed",
+              "title": {
+                "en": "Disk Usage has changed",
+                "nl": "Schijf gebruik is veranderd"
+              },
+              "tokens": [
+                {
+                  "name": "measure_uptime",
+                  "title": {
+                    "en": "Disk Usage",
+                    "nl": "Schijf gebruik"
+                  },
+                  "type": "number",
+                  "example": 99
+                }
+              ]
             }
           ]
+        }
+      },
+      "measure_cpu_usage": {
+        "type": "number",
+        "title": {
+          "en": "CPU Usage",
+          "nl": "CPU gebruik"
+        },
+        "units": {
+          "en": "%",
+          "nl": "%"
+        },
+        "insights": true,
+        "desc": {
+          "en": "CPU Usage in %",
+          "nl": "CPU gebruik in %"
+        },
+        "chartType": "spline",
+        "decimals": 1,
+        "getable": true,
+        "setable": false,
+        "uiComponent": "sensor",
+        "icon": "assets/icons/cpu-fill.svg",
+        "$flow": {
+          "triggers": [
+            {
+              "id": "measure_CPU_usage_changed",
+              "title": {
+                "en": "CPU Usage has changed",
+                "nl": "CPU gebruik is veranderd"
+              },
+              "tokens": [
+                {
+                  "name": "measure_uptime",
+                  "title": {
+                    "en": "CPU Usage",
+                    "nl": "CPU gebruik"
+                  },
+                  "type": "number",
+                  "example": 99
+                }
+              ]
+            }
+          ]
+        }
       }
-  ]
+  }
 }
