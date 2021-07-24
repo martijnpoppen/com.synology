@@ -1,0 +1,14 @@
+{
+  "name": "com.synology",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martijnpoppen/com.synology"
+  },
+  "dependencies": {
+    "wake_on_lan": "0.0.4", 
+    "got": "^11.8.2",
+    "request": "^2.69.0"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "id": "com.synology",
+  "version": "0.0.3",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "brandColor": "#000000",
+  "name": {
+    "en": "Synology",
+    "nl": "Synology"
+  },
+  "description": {
+    "en": "The next step in data storage starts here",
+    "nl": "De volgende stap in gegevensbeheer begint hier"
+  },
+  "category": [
+    "security"
+  ],
+  "images": {
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "author": {
+    "name": "Martijn Poppen",
+    "email": "synology@martijnpoppen.nl"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Martijn Poppen",
+        "email": "synology@martijnpoppen.nl"
+      },
+      {
+        "name": "Robbert Vis (NAS icons)",
+        "email": "synology@martijnpoppen.nl"
+      }
+    ],
+    "translators": [
+      {
+        "name": "Martijn Poppen",
+        "email": "synology@martijnpoppen.nl"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "martijnpoppen"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://community.athom.com/t/app-eufy-home/46610/"
+  },
+  "source": "https://github.com/martijnpoppen/com.eufylife.home",
+  "homeyCommunityTopicId": 46610,
+  "support": "https://community.athom.com/t/app-eufy-home/46610/",
+  "drivers": [
+    {
+        "id": "DiskStation",
+        "class": "vacuumcleaner",
+        "capabilities": [],
+        "name": {
+          "en": "Synology DiskStation",
+          "nl": "Synology DiskStation"
+        },
+        "images": {
+          "large": "drivers/DiskStation/assets/images/large.jpg",
+          "small": "drivers/DiskStation/assets/images/small.jpg"
+        },
+        "pair": [
+            {
+              "id": "login_synology"
+            },
+            {
+              "id": "list_devices",
+              "template": "list_devices",
+              "navigation": {
+                "prev": "login_synology",
+                "next": "add_devices"
+              }
+            },
+            {
+              "id": "add_devices",
+              "template": "add_devices"
+            }
+          ]
+      }
+  ]
+}
