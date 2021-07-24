@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -12,7 +12,9 @@
     "en": "The next step in data storage starts here",
     "nl": "De volgende stap in gegevensbeheer begint hier"
   },
-  "category": ["security"],
+  "category": [
+    "security"
+  ],
   "images": {
     "large": "/assets/images/large.jpg",
     "small": "/assets/images/small.jpg"
@@ -26,16 +28,14 @@
       {
         "name": "Martijn Poppen",
         "email": "synology@martijnpoppen.nl"
-      },
-      {
-        "name": "Robbert Vis (NAS icons)",
-        "email": "synology@martijnpoppen.nl"
       }
     ],
     "translators": [
       {
-        "name": "Martijn Poppen",
-        "email": "synology@martijnpoppen.nl"
+        "name": "🇬🇧 Martijn Poppen"
+      },
+      {
+        "name": "🇳🇱 Martijn Poppen"
       }
     ]
   },
@@ -69,8 +69,8 @@
         "nl": "Synology DiskStation"
       },
       "images": {
-        "large": "drivers/DiskStation/assets/images/large.jpg",
-        "small": "drivers/DiskStation/assets/images/small.jpg"
+        "large": "drivers/DiskStation/assets/images/large.png",
+        "small": "drivers/DiskStation/assets/images/small.png"
       },
       "pair": [
         {
@@ -118,23 +118,23 @@
           "value": 5000
         },
         {
-            "id": "user",
-            "type": "text",
-            "label": {
-              "en": "User",
-              "nl": "Gebruiker"
-            },
-            "value": ""
+          "id": "user",
+          "type": "text",
+          "label": {
+            "en": "User",
+            "nl": "Gebruiker"
           },
-          {
-            "id": "passwd",
-            "type": "password",
-            "label": {
-              "en": "Password",
-              "nl": "Wachtwoord"
-            },
-            "value": ""
+          "value": ""
+        },
+        {
+          "id": "passwd",
+          "type": "password",
+          "label": {
+            "en": "Password",
+            "nl": "Wachtwoord"
           },
+          "value": ""
+        },
         {
           "id": "debug",
           "type": "checkbox",
@@ -193,92 +193,92 @@
       }
     },
     "measure_disk_usage": {
-        "type": "number",
-        "title": {
-          "en": "Disk Usage",
-          "nl": "Schijf gebruik"
-        },
-        "units": {
-          "en": "%",
-          "nl": "%"
-        },
-        "insights": true,
-        "desc": {
-          "en": "Disk Usage in %",
-          "nl": "Schijf gebruik in %"
-        },
-        "chartType": "spline",
-        "decimals": 2,
-        "getable": true,
-        "setable": false,
-        "uiComponent": "sensor",
-        "icon": "assets/icons/disc-fill.svg",
-        "$flow": {
-          "triggers": [
-            {
-              "id": "measure_disk_usage_changed",
-              "title": {
-                "en": "Disk Usage has changed",
-                "nl": "Schijf gebruik is veranderd"
-              },
-              "tokens": [
-                {
-                  "name": "measure_uptime",
-                  "title": {
-                    "en": "Disk Usage",
-                    "nl": "Schijf gebruik"
-                  },
-                  "type": "number",
-                  "example": 99
-                }
-              ]
-            }
-          ]
-        }
+      "type": "number",
+      "title": {
+        "en": "Disk Usage",
+        "nl": "Schijf gebruik"
       },
-      "measure_cpu_usage": {
-        "type": "number",
-        "title": {
-          "en": "CPU Usage",
-          "nl": "CPU gebruik"
-        },
-        "units": {
-          "en": "%",
-          "nl": "%"
-        },
-        "insights": true,
-        "desc": {
-          "en": "CPU Usage in %",
-          "nl": "CPU gebruik in %"
-        },
-        "chartType": "spline",
-        "decimals": 1,
-        "getable": true,
-        "setable": false,
-        "uiComponent": "sensor",
-        "icon": "assets/icons/cpu-fill.svg",
-        "$flow": {
-          "triggers": [
-            {
-              "id": "measure_CPU_usage_changed",
-              "title": {
-                "en": "CPU Usage has changed",
-                "nl": "CPU gebruik is veranderd"
-              },
-              "tokens": [
-                {
-                  "name": "measure_uptime",
-                  "title": {
-                    "en": "CPU Usage",
-                    "nl": "CPU gebruik"
-                  },
-                  "type": "number",
-                  "example": 99
-                }
-              ]
-            }
-          ]
-        }
+      "units": {
+        "en": "%",
+        "nl": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Disk Usage in %",
+        "nl": "Schijf gebruik in %"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/disc-fill.svg",
+      "$flow": {
+        "triggers": [
+          {
+            "id": "measure_disk_usage_changed",
+            "title": {
+              "en": "Disk Usage has changed",
+              "nl": "Schijf gebruik is veranderd"
+            },
+            "tokens": [
+              {
+                "name": "measure_uptime",
+                "title": {
+                  "en": "Disk Usage",
+                  "nl": "Schijf gebruik"
+                },
+                "type": "number",
+                "example": 99
+              }
+            ]
+          }
+        ]
       }
+    },
+    "measure_cpu_usage": {
+      "type": "number",
+      "title": {
+        "en": "CPU Usage",
+        "nl": "CPU gebruik"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "CPU Usage in %",
+        "nl": "CPU gebruik in %"
+      },
+      "chartType": "spline",
+      "decimals": 1,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/cpu-fill.svg",
+      "$flow": {
+        "triggers": [
+          {
+            "id": "measure_CPU_usage_changed",
+            "title": {
+              "en": "CPU Usage has changed",
+              "nl": "CPU gebruik is veranderd"
+            },
+            "tokens": [
+              {
+                "name": "measure_uptime",
+                "title": {
+                  "en": "CPU Usage",
+                  "nl": "CPU gebruik"
+                },
+                "type": "number",
+                "example": 99
+              }
+            ]
+          }
+        ]
+      }
+    }
   }
 }
