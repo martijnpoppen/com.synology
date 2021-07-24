@@ -52,10 +52,21 @@
   "source": "https://github.com/martijnpoppen/com.eufylife.home",
   "homeyCommunityTopicId": 46610,
   "support": "https://community.athom.com/t/app-eufy-home/46610/",
+  "discovery": {
+    "diskstation_discovery": {
+        "type": "mdns-sd",
+        "mdns-sd": {
+          "protocol": "tcp",
+          "name": "_http"
+        },
+        "id": "{{txt.id}}"
+    }
+  },
   "drivers": [
     {
       "id": "DiskStation",
       "class": "homealarm",
+      "discovery": "diskstation_discovery",
       "capabilities": [
         "onoff",
         "alarm_heat",

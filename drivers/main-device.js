@@ -6,8 +6,14 @@ let _synoClient = undefined;
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
+        const settings = this.getSettings();
+
 		this.homey.app.log('[Device] - init =>', this.getName());
         this.homey.app.setDevices(this);
+
+        if(!settings.mac || !settings.mac.length) {
+            await this.findMacAddress();
+        }
 
         await this.setSynoClient();
        
@@ -17,7 +23,9 @@ module.exports = class mainDevice extends Homey.Device {
 
         await this.checkOnOffStateInterval();
         await this.setCapabilityValuesInterval();
-    }
+
+        await this.setAvailable();
+  }
 
     async onSettings({ oldSettings, newSettings, changedKeys }) {
         this.homey.app.log(`[Device] ${this.getName()} - oldSettings`, oldSettings);
@@ -66,6 +74,29 @@ module.exports = class mainDevice extends Homey.Device {
                 this.addCapability(c);
             });
             await sleep(2000);
+        } catch (error) {
+            this.homey.app.log(error)
+        }
+    }
+
+    async findMacAddress() {
+        try {
+            const discoveryStrategy = this.homey.discovery.getStrategy("diskstation_discovery");
+
+            // Use the discovery results that were already found
+            const initialDiscoveryResults = discoveryStrategy.getDiscoveryResults();
+            for (const discoveryResult of Object.values(initialDiscoveryResults)) {
+                this.homey.app.log(`[Device] ${this.getName()} - findMacAddress =>`, discoveryResult);
+
+                if(discoveryResult.txt && discoveryResult.txt.vendor === 'Synology') {
+                    const mac = discoveryResult.txt.mac_address.split('|');
+                    const settings = this.getSettings();
+
+                    await this.setSettings({...settings, mac: mac[0]});
+
+                    this.homey.app.log(`[Device] ${this.getName()} - findMacAddress - address =>`, mac);
+                }
+            }
         } catch (error) {
             this.homey.app.log(error)
         }
