@@ -10,7 +10,8 @@
   },
   "description": {
     "en": "The next step in data storage starts here",
-    "nl": "De volgende stap in gegevensbeheer begint hier"
+    "nl": "De volgende stap in gegevensbeheer begint hier",
+    "de": "Der nächste Schritt der Datenspeicherung beginnt hier"
   },
   "category": [
     "security"
@@ -36,6 +37,9 @@
       },
       {
         "name": "🇳🇱 Martijn Poppen"
+      },
+      {
+        "name": "🇩🇪 Dirk Göbel"
       }
     ]
   },
@@ -77,7 +81,8 @@
       ],
       "name": {
         "en": "Synology DiskStation",
-        "nl": "Synology DiskStation"
+        "nl": "Synology DiskStation",
+        "de": "Synology DiskStation"
       },
       "images": {
         "large": "drivers/DiskStation/assets/images/large.png",
@@ -106,7 +111,8 @@
           "type": "text",
           "label": {
             "en": "MAC Addres",
-            "nl": "MAC Adres"
+            "nl": "MAC Adres",
+            "de": "MAC-Adresse"
           },
           "value": ""
         },
@@ -115,7 +121,8 @@
           "type": "text",
           "label": {
             "en": "IP Address",
-            "nl": "IP Adres"
+            "nl": "IP Adres",
+            "de": "IP-Adresse"
           },
           "value": ""
         },
@@ -124,7 +131,8 @@
           "type": "number",
           "label": {
             "en": "Port",
-            "nl": "Port"
+            "nl": "Port",
+            "de": "Port"
           },
           "value": 5000
         },
@@ -133,7 +141,8 @@
           "type": "text",
           "label": {
             "en": "User",
-            "nl": "Gebruiker"
+            "nl": "Gebruiker",
+            "de": "Benutzer"
           },
           "value": ""
         },
@@ -142,7 +151,8 @@
           "type": "password",
           "label": {
             "en": "Password",
-            "nl": "Wachtwoord"
+            "nl": "Wachtwoord",
+            "de": "Passwort"
           },
           "value": ""
         },
@@ -151,7 +161,8 @@
           "type": "checkbox",
           "label": {
             "en": "Debug Logs",
-            "nl": "Debug Logs"
+            "nl": "Debug Logs",
+            "de": "Debug Logs"
           },
           "value": false
         }
@@ -163,16 +174,19 @@
       "type": "number",
       "title": {
         "en": "Up-Time",
-        "nl": "Online tijd"
+        "nl": "Online tijd",
+        "de": "Laufzeit"
       },
       "units": {
         "en": "Hours",
-        "nl": "Uur"
+        "nl": "Uur",
+        "de": "Stunden"
       },
       "insights": true,
       "desc": {
         "en": "Up-Time in hours",
-        "nl": "Online tijd in uren"
+        "nl": "Online tijd in uren",
+        "de": "Laufzeit in Stunden"
       },
       "chartType": "spline",
       "decimals": 2,
@@ -186,14 +200,16 @@
             "id": "measure_uptime_changed",
             "title": {
               "en": "The uptime has changed",
-              "nl": "De online tijd is veranderd"
+              "nl": "De online tijd is veranderd",
+              "de": "Die Laufzeit hat sich geändert"
             },
             "tokens": [
               {
                 "name": "measure_uptime",
                 "title": {
                   "en": "Up-Time",
-                  "nl": "Online tijd"
+                  "nl": "Online tijd",
+                  "de": "Laufzeit"
                 },
                 "type": "number",
                 "example": 99
@@ -207,16 +223,19 @@
       "type": "number",
       "title": {
         "en": "Disk Usage",
-        "nl": "Schijf gebruik"
+        "nl": "Schijf gebruik",
+        "de": "Festplattenbelegung"
       },
       "units": {
         "en": "%",
-        "nl": "%"
+        "nl": "%",
+        "de": "%"
       },
       "insights": true,
       "desc": {
         "en": "Disk Usage in %",
-        "nl": "Schijf gebruik in %"
+        "nl": "Schijf gebruik in %",
+        "de": "Festplattenbelegung in %"
       },
       "chartType": "spline",
       "decimals": 2,
@@ -230,14 +249,16 @@
             "id": "measure_disk_usage_changed",
             "title": {
               "en": "Disk Usage has changed",
-              "nl": "Schijf gebruik is veranderd"
+              "nl": "Schijf gebruik is veranderd",
+              "de": "Festplattenbelegung hat sich verändert"
             },
             "tokens": [
               {
                 "name": "measure_uptime",
                 "title": {
                   "en": "Disk Usage",
-                  "nl": "Schijf gebruik"
+                  "nl": "Schijf gebruik",
+                  "de": "Festplattenbelegung"
                 },
                 "type": "number",
                 "example": 99
@@ -251,16 +272,19 @@
       "type": "number",
       "title": {
         "en": "CPU Usage",
-        "nl": "CPU gebruik"
+        "nl": "CPU gebruik",
+        "de": "CPU-Auslastung"
       },
       "units": {
         "en": "%",
-        "nl": "%"
+        "nl": "%",
+        "de": "%"
       },
       "insights": true,
       "desc": {
         "en": "CPU Usage in %",
-        "nl": "CPU gebruik in %"
+        "nl": "CPU gebruik in %",
+        "de": "CPU-Auslastung in %"
       },
       "chartType": "spline",
       "decimals": 1,
@@ -274,14 +298,16 @@
             "id": "measure_CPU_usage_changed",
             "title": {
               "en": "CPU Usage has changed",
-              "nl": "CPU gebruik is veranderd"
+              "nl": "CPU gebruik is veranderd",
+              "de": "CPU-Auslastung hat sich verändert"
             },
             "tokens": [
               {
                 "name": "measure_uptime",
                 "title": {
                   "en": "CPU Usage",
-                  "nl": "CPU gebruik"
+                  "nl": "CPU gebruik",
+                  "de": "CPU-Auslastung"
                 },
                 "type": "number",
                 "example": 99
