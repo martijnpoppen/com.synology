@@ -21,7 +21,7 @@ module.exports = class mainDriver extends Homey.Driver {
                     mac: null,
                     secure: false,
                     ip: data.ipAddress,
-                    port: 5000,
+                    port: parseInt(data.port) || 5000,
                     user: data.username,
                     passwd: data.password,
                     version: 6,
@@ -37,7 +37,7 @@ module.exports = class mainDriver extends Homey.Driver {
                     throw new Error(this.homey.__('pair.error'));
                 }
             } catch (error) {
-                homey.app.log(error);
+                this.homey.app.log(error);
             }
            
         });

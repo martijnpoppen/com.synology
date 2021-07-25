@@ -33,17 +33,23 @@
     <div class="hy-tmpl-login_synology-logo" style="background-image: url('synology.svg');"></div>
     <div class="hy-tmpl-login_synology-row row">
         <label class="hy-label hy-tmpl-login_synology-label" for="username" data-i18n="pair.username"></label>
-        <input class="hy-input-text" name="username" type="text" value="" placeholder="Username">
+        <input class="hy-input-text" name="username" type="text" value="" placeholder="synology">
     </div>
     <div class="hy-tmpl-login_synology-row row">
         <label class="hy-label hy-tmpl-login_synology-label" for="password" data-i18n="pair.password"></label>
-        <input class="hy-input-text" name="password" type="text" value="" placeholder="Password">
+        <input class="hy-input-text" name="password" type="text" value="" placeholder="synology">
     </div>
 
     <div class="hy-tmpl-login_synology-row row">
         <label class="hy-label hy-tmpl-login_synology-label" for="ipAddress" data-i18n="pair.ip"></label>
-        <input class="hy-input-text" name="ipAddress" type="text" value="" placeholder="IP Address">
+        <input class="hy-input-text" name="ipAddress" type="text" value="" placeholder="192.168.178.10">
     </div>
+
+    <div class="hy-tmpl-login_synology-row row">
+        <label class="hy-label hy-tmpl-login_synology-label" for="port" data-i18n="pair.port"></label>
+        <input class="hy-input-text" name="port" type="number" value="" placeholder="5000">
+    </div>
+
     <div class="hy-tmpl-login_synology-row row">
         <input class="hy-button hy-button-primary hy-button-fill hy-tmpl-login_synology-submit button" type="submit"
             value="Inloggen">
@@ -56,6 +62,7 @@
         l = e.querySelector('input[name="username"]'),
         n = e.querySelector('input[name="password"]'),
         p = e.querySelector('input[name="ipAddress"]'),
+        pp = e.querySelector('input[name="port"]'),
         m = !1; 
         Homey.setTitle(Homey.__("$tmpl.login_credentials.title")),
         o.addEventListener("submit", function (e) { 
@@ -64,9 +71,10 @@
                 Homey.showLoadingOverlay(Homey.__("$tmpl.login_credentials.loading")); 
                 var z = l.value, 
                 r = n.value,
-                q = p.value; 
+                q = p.value,
+                qq = pp.value; 
 
-                return Homey.emit("login", { username: z, password: r, ipAddress: q }, function (e, o) { 
+                return Homey.emit("login", { username: z, password: r, ipAddress: q, port: qq }, function (e, o) { 
                     if(e) {
                         Homey.error(e)
                     } else if(z) {

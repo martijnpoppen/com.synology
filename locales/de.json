@@ -2,7 +2,8 @@
   "pair": {
     "username": "Benutzername",
     "password": "Passwort",
-    "ip": "IP-Adresse (Lokale-IP - Port 5000)",
+    "ip": "IP-Adresse (Lokale-IP)",
+    "port": "Port (Optional - ursprünglich: 5000)",
     "error": "Keine DiskStations gefunden."
   },
   "diskstation": {

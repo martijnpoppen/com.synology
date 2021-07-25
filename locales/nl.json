@@ -2,7 +2,8 @@
   "pair": {
     "username": "Gebruikersnaam",
     "password": "Wachtwoord",
-    "ip": "IP Addres (Lokaal IP - Poort 5000)",
+    "ip": "IP Addres (Lokaal IP)",
+    "port": "Poort (optioneel - standaard: 5000)",
     "error": "Geen DiskStations gevonden."
   },
   "diskstation": {
