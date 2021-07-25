@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -58,12 +58,12 @@
   "support": "https://community.athom.com/t/app-eufy-home/46610/",
   "discovery": {
     "diskstation_discovery": {
-        "type": "mdns-sd",
-        "mdns-sd": {
-          "protocol": "tcp",
-          "name": "_http"
-        },
-        "id": "{{txt.id}}"
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "protocol": "tcp",
+        "name": "_http"
+      },
+      "id": "{{txt.id}}"
     }
   },
   "drivers": [
@@ -131,7 +131,7 @@
           "type": "number",
           "label": {
             "en": "Port",
-            "nl": "Port",
+            "nl": "Poort",
             "de": "Port"
           },
           "value": 5000

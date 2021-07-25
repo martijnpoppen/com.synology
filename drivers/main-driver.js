@@ -34,7 +34,7 @@ module.exports = class mainDriver extends Homey.Driver {
                 this.synoData = await _synoClient.getInfo();
     
                 if(!this.synoData && !this.synoData.model) {
-                    throw new Error('No DiskStations found.');
+                    throw new Error(this.homey.__('pair.error'));
                 }
             } catch (error) {
                 homey.app.log(error);

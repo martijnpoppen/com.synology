@@ -108,7 +108,7 @@ module.exports = class mainDevice extends Homey.Device {
                 this.homey.app.log(`[Device] ${this.getName()} - onoff - wakeUp`);
                 _synoClient.wakeUp();
 
-                await this.setWarning('Wake-Up can take up to 10 minutes. OnOff status will show "ON" when DiskStation is succesfully booted.');
+                await this.setWarning(this.homey.__("diskstation.wol"));
             } else {
                 this.homey.app.log(`[Device] ${this.getName()} - onoff - shutdown`);
                 _synoClient.shutdown();
@@ -245,8 +245,6 @@ module.exports = class mainDevice extends Homey.Device {
                 load = Math.round(data.cpu.user * 100);
             }
     
-
-
             const usage = {cpu_load: load};
             this.homey.app.log(`[Device] ${this.getName()} - cpu_load`, load);
 

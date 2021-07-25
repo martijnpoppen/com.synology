@@ -1,0 +1,11 @@
+{
+  "pair": {
+    "username": "Benutzername",
+    "password": "Passwort",
+    "ip": "IP-Adresse (Lokale-IP - Port 5000)",
+    "error": "Keine DiskStations gefunden."
+  },
+  "diskstation": {
+    "wol": "Wake-On-Lan kann bis zu 10 Minuten dauern. Der Ein/Aus-Status zeigt “EIN” an, wenn die DiskStation erfolgreich gebootet wurde."
+  }
+}

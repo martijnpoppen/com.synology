@@ -1,0 +1,11 @@
+{
+  "pair": {
+    "username": "Gebruikersnaam",
+    "password": "Wachtwoord",
+    "ip": "IP Addres (Lokaal IP - Poort 5000)",
+    "error": "Geen DiskStations gevonden."
+  },
+  "diskstation": {
+      "wol": "Wake-On-Lan kan tot 10 minuten duren. De AanUit-status zal 'AAN' tonen wanneer DiskStation succesvol is opgestart."
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "pair": {
+    "username": "Username",
+    "password": "Password",
+    "ip": "IP Address (local IP - Port 5000)",
+    "error": "No DiskStations found."
+  },
+  "diskstation": {
+      "wol": "Wake-Up can take up to 10 minutes. OnOff status will show 'ON' when DiskStation is succesfully booted."
+  }
+}

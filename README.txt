@@ -22,11 +22,5 @@ Current features:
 Support: 
 - Synology DiskStation
 
-How to use:
-- Install this app on your Homey.
-- Add a device.
-- In the device settings provide your deviceId/localKey
-- Use the app
-
 More info on the community:
 - Link in app info below
