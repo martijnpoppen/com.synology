@@ -25,7 +25,7 @@ Support:
 How to use:
 - Install this app on your Homey.
 - Add a device.
-- In de device settings provide your deviceId/localKey
+- In the device settings provide your deviceId/localKey
 - Use the app
 
 More info on the community:
