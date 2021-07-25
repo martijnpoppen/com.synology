@@ -19,9 +19,9 @@ module.exports = class mainDriver extends Homey.Driver {
                 this.config = {
                     debug: false,
                     mac: null,
-                    secure: false,
+                    secure: data.secure || false,
                     ip: data.ipAddress,
-                    port: parseInt(data.port) || 5000,
+                    port: parseInt(data.port) || (data.secure ? 5001 : 5000),
                     user: data.username,
                     passwd: data.password,
                     version: 6,

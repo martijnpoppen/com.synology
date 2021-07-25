@@ -44,6 +44,11 @@
         <label class="hy-label hy-tmpl-login_synology-label" for="ipAddress" data-i18n="pair.ip"></label>
         <input class="hy-input-text" name="ipAddress" type="text" value="" placeholder="192.168.178.10">
     </div>
+    
+    <div class="hy-tmpl-login_synology-row row">
+        <input class="hy-input-checkbox" name="secure" type="checkbox">
+        <label class="hy-label hy-tmpl-login_synology-label" for="secure" data-i18n="pair.secure"></label>
+    </div>
 
     <div class="hy-tmpl-login_synology-row row">
         <label class="hy-label hy-tmpl-login_synology-label" for="port" data-i18n="pair.port"></label>
@@ -62,6 +67,7 @@
         l = e.querySelector('input[name="username"]'),
         n = e.querySelector('input[name="password"]'),
         p = e.querySelector('input[name="ipAddress"]'),
+        s = e.querySelector('input[name="secure"]'),
         pp = e.querySelector('input[name="port"]'),
         m = !1; 
         Homey.setTitle(Homey.__("$tmpl.login_credentials.title")),
@@ -72,9 +78,10 @@
                 var z = l.value, 
                 r = n.value,
                 q = p.value,
-                qq = pp.value; 
+                qq = pp.value,
+                t = s.checked; 
 
-                return Homey.emit("login", { username: z, password: r, ipAddress: q, port: qq }, function (e, o) { 
+                return Homey.emit("login", { username: z, password: r, ipAddress: q, port: qq, secure: t }, function (e, o) { 
                     if(e) {
                         Homey.error(e)
                     } else if(z) {
