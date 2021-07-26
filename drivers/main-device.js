@@ -15,9 +15,9 @@ module.exports = class mainDevice extends Homey.Device {
             await this.findMacAddress();
         }
 
-        await this.setSynoClient();
-       
         await this.checkCapabilities();
+
+        await this.setSynoClient();
 
         this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
 
@@ -178,14 +178,13 @@ module.exports = class mainDevice extends Homey.Device {
             this.homey.app.log(`[Device] ${this.getName()} - deviceInfo =>`, deviceInfo);
             this.homey.app.log(`[Device] ${this.getName()} - diskUsageInfo =>`, diskUsageInfo);
             
-            await this.setCapabilityValue('alarm_heat', temperature_warn);
+            await this.setCapabilityValue('alarm_heat', !!temperature_warn);
             await this.setCapabilityValue('measure_temperature', parseInt(temperature));
-            await this.setCapabilityValue('measure_uptime', parseInt(uptime / 3600));
-            await this.setCapabilityValue('measure_disk_usage', disk_usage);
-            await this.setCapabilityValue('measure_cpu_usage', cpu_load);
+            await this.setCapabilityValue('measure_uptime', parseInt(uptime) / 3600);
+            await this.setCapabilityValue('measure_disk_usage', parseInt(disk_usage));
+            await this.setCapabilityValue('measure_cpu_usage', parseInt(cpu_load));
             
-
-            await this.setAvailable();
+            this.homey.app.log(`[Device] ${this.getName()} - setCapabilityValues =>`, this.getCapabilities());
         } catch (error) {
             this.homey.app.log(error);
         }

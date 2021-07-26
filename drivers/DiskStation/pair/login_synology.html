@@ -27,6 +27,10 @@
             .hy-tmpl-login_synology-row {
                 margin-bottom: 1em
             }
+
+            .hidden {
+                display: none;
+            }
         </style>
 
 <form class="hy-tmpl-login_synology-form" action="/" method="post">
@@ -37,7 +41,7 @@
     </div>
     <div class="hy-tmpl-login_synology-row row">
         <label class="hy-label hy-tmpl-login_synology-label" for="password" data-i18n="pair.password"></label>
-        <input class="hy-input-text" name="password" type="text" value="" placeholder="synology">
+        <input class="hy-input-text" name="password" type="password" value="" placeholder="synology">
     </div>
 
     <div class="hy-tmpl-login_synology-row row">
@@ -45,7 +49,7 @@
         <input class="hy-input-text" name="ipAddress" type="text" value="" placeholder="192.168.178.10">
     </div>
     
-    <div class="hy-tmpl-login_synology-row row">
+    <div class="hy-tmpl-login_synology-row row hidden">
         <input class="hy-input-checkbox" name="secure" type="checkbox">
         <label class="hy-label hy-tmpl-login_synology-label" for="secure" data-i18n="pair.secure"></label>
     </div>

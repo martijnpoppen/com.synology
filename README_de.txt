@@ -3,6 +3,10 @@ Unterstützung für Synology DiskStations
 Erhalten Sie Informationen von Ihrer Synology DiskStation.
 Werden Sie benachrichtigt wenn sich ein Wert ändert.
 
+Support:
+- DSM 6
+- Synology DiskStation
+
 Anwendung:
 - Installieren Sie diese App auf Ihrem Homey.
 - Fügen Sie ein neues Gerät hinzu - Tragen Sie die IP-Adresse ein - Benutzername - Passwort
@@ -18,9 +22,6 @@ Aktuelle Features:
 - Anzeige der Laufzeit
 - Informiert werden wenn sich ein Wert ändert
 - Flows
-
-Support:
-- Synology DiskStation
 
 Weitere Informationen in der Community:
 - Link in der App-Info unten

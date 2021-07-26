@@ -2,7 +2,7 @@
   "pair": {
     "username": "Username",
     "password": "Password",
-    "ip": "IP Address (local IP)",
+    "ip": "IP Address (local IP - SSL: OFF)",
     "secure": "Use SSL connection",
     "port": "Port (optional - default: 5000)",
     "error": "No DiskStations found."

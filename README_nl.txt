@@ -3,6 +3,10 @@ Voegt ondersteuning toe voor Synology DiskStation
 Haal informatie op van uw Synology DiskStation.
 Ontvang een melding wanneer een waarde is gewijzigd.
 
+Ondersteund:
+- DSM 6
+- Synology DiskStation
+
 Installatie:
 - Installeer deze app op je Homey.
 - Ga naar apparaat toevoegen - Vul IP in - Gebruikersnaam - Wachtwoord
@@ -18,9 +22,6 @@ Huidige functies:
 - Toon online tijd
 - Ontvang een melding wanneer een waarde is gewijzigd.
 - Flows
-
-Apparaten:
-- Synology DiskStation
 
 Meer info op de community pagina:
 - Link in onderaan App Store pagina

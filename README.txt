@@ -3,6 +3,10 @@ Adds support for Synology DiskStation
 Retrieve information from your Synology DiskStation. 
 Get notification when a value has changed.
 
+Support: 
+- DSM 6
+- Synology DiskStation
+
 How to use:
 - Install this app on your Homey.
 - Go to new devices - Fill in IP - Username - Password
@@ -18,9 +22,6 @@ Current features:
 - Display online time
 - Get notification when a value has changed.
 - Flows
-
-Support: 
-- Synology DiskStation
 
 More info on the community:
 - Link in app info below

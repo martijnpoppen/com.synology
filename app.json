@@ -71,7 +71,6 @@
     {
       "id": "DiskStation",
       "class": "homealarm",
-      "discovery": "diskstation_discovery",
       "capabilities": [
         "onoff",
         "alarm_heat",
