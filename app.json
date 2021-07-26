@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.3.1",
+  "version": "1.3.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -82,8 +82,15 @@
         "measure_temperature",
         "measure_uptime",
         "measure_disk_usage",
-        "measure_cpu_usage"
+        "measure_cpu_usage",
+        "measure_ram_usage"
       ],
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
+        }
+      },
       "name": {
         "en": "Synology DiskStation",
         "nl": "Synology DiskStation",
@@ -293,7 +300,7 @@
             },
             "tokens": [
               {
-                "name": "measure_uptime",
+                "name": "measure_disk_usage",
                 "title": {
                   "en": "Disk Usage",
                   "nl": "Schijf gebruik",
@@ -342,11 +349,60 @@
             },
             "tokens": [
               {
-                "name": "measure_uptime",
+                "name": "measure_cpu_usage",
                 "title": {
                   "en": "CPU Usage",
                   "nl": "CPU gebruik",
                   "de": "CPU-Auslastung"
+                },
+                "type": "number",
+                "example": 99
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "measure_ram_usage": {
+      "type": "number",
+      "title": {
+        "en": "RAM Usage",
+        "nl": "RAM gebruik",
+        "de": "RAM-Auslastung"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%",
+        "de": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "RAM Usage in %",
+        "nl": "RAM gebruik in %",
+        "de": "RAM-Auslastung in %"
+      },
+      "chartType": "spline",
+      "decimals": 1,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/lightning-charge.svg",
+      "$flow": {
+        "triggers": [
+          {
+            "id": "measure_ram_usage_changed",
+            "title": {
+              "en": "RAM Usage has changed",
+              "nl": "RAM gebruik is veranderd",
+              "de": "RAM-Auslastung hat sich verändert"
+            },
+            "tokens": [
+              {
+                "name": "measure_ram_usage",
+                "title": {
+                  "en": "RAM Usage",
+                  "nl": "RAM gebruik",
+                  "de": "RAM-Auslastung"
                 },
                 "type": "number",
                 "example": 99
