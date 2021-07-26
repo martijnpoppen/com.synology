@@ -16,5 +16,8 @@
   },
   "1.0.1": {
     "en": "Add mac address discovery"
+  },
+  "1.1.0": {
+    "en": "NEW: translations"
   }
 }
