@@ -71,8 +71,10 @@
     {
       "id": "DiskStation",
       "class": "homealarm",
+      "connectivity": ["lan", "cloud"],
       "capabilities": [
         "onoff",
+        "action_reboot",
         "alarm_heat",
         "measure_temperature",
         "measure_uptime",
@@ -179,6 +181,30 @@
       ]
     }
   ],
+  "flow": {
+    "actions": [
+      {
+        "id": "action_reboot_flow",
+        "title": {
+          "en": "Reboot",
+          "nl": "Herstarten",
+          "de": "Neustarten"
+        },
+        "titleFormatted": {
+            "en": "[[device]] Reboot",
+            "nl": "[[device]] Herstarten",
+            "de": "[[device]] Neustarten"
+          },
+        "args": [
+            {
+              "type": "device",
+              "name": "device",
+              "filter": "capabilities=action_reboot"
+            }
+          ]
+      }
+    ]
+  },
   "capabilities": {
     "measure_uptime": {
       "type": "number",
@@ -326,6 +352,17 @@
           }
         ]
       }
-    }
+    },
+    "action_reboot": {
+        "type": "boolean",
+        "title": {
+          "en": "Reboot",
+          "nl": "Herstarten",
+          "de": "Neustarten"
+        },
+        "getable": false,
+        "setable": true,
+        "uiComponent": "button"
+      }
   }
 }

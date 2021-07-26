@@ -5,11 +5,12 @@ Werden Sie benachrichtigt wenn sich ein Wert ändert.
 
 Support:
 - DSM 6
+- DSM 7
 - Synology DiskStation
 
 Anwendung:
 - Installieren Sie diese App auf Ihrem Homey.
-- Fügen Sie ein neues Gerät hinzu - Tragen Sie die IP-Adresse ein - Benutzername - Passwort
+- Fügen Sie ein neues Gerät hinzu - Tragen Sie die IP-Adresse ein - Benutzername - Passwort - (2FA optional)
 - Daten werden abgerufen.
 - Überprüfen Sie den Status oder erstellen Sie Flows.
 

@@ -1,6 +1,7 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
 const { sleep } = require('../lib/helpers');
+const flowActions = require('../lib/flows/actions');
 
 let _synoClient = undefined;
 
@@ -20,6 +21,7 @@ module.exports = class mainDevice extends Homey.Device {
         await this.setSynoClient();
 
         this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
+        this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
 
         await this.checkOnOffStateInterval();
         await this.setCapabilityValuesInterval();
@@ -50,6 +52,8 @@ module.exports = class mainDevice extends Homey.Device {
         this.homey.app.log(`[Device] - ${this.getName()} => setSynoClient Got config`, this.config);
 
         _synoClient = await new Synology(this.config);
+
+        await flowActions.init(this.homey);
     }
 
     async checkCapabilities() {
@@ -112,7 +116,27 @@ module.exports = class mainDevice extends Homey.Device {
             } else {
                 this.homey.app.log(`[Device] ${this.getName()} - onoff - shutdown`);
                 _synoClient.shutdown();
+
+                this.setUnavailable(this.homey.__("diskstation.shutdown"));
             }
+
+            return Promise.resolve(true);
+        } catch (e) {
+            Homey.app.error(e);
+            return Promise.reject(e);
+        }
+    }
+
+    async onCapability_REBOOT(value) {
+        try {
+           this.homey.app.log(`[Device] ${this.getName()} - onCapability_REBOOT`, value);
+
+           this.setStoreValue('rebooting', true);
+           this.setCapabilityValue('action_reboot', false);
+
+           _synoClient.shutdown();
+           
+           this.setUnavailable(this.homey.__("diskstation.reboot"));
 
             return Promise.resolve(true);
         } catch (e) {
@@ -133,9 +157,25 @@ module.exports = class mainDevice extends Homey.Device {
             } else {
                 await this.setCapabilityValue('onoff', false);
             }
+
+            this.checkRebootState();
         } catch (error) {
             this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, error);
             await this.setCapabilityValue('onoff', false);
+            this.checkRebootState();
+        }
+    }
+
+    async checkRebootState() {
+        const isOn = await this.getCapabilityValue('onoff');
+        
+        if(isOn && this.getStoreValue('rebooting')) {
+            this.homey.app.log(`[Device] ${this.getName()} - checkRebootState - reboot done`);
+            this.setStoreValue('rebooting', false);
+            await this.setAvailable();
+        } else if(!isOn && this.getStoreValue('rebooting')) {
+            this.homey.app.log(`[Device] ${this.getName()} - checkRebootState - wakeUp`);
+            _synoClient.wakeUp();
         }
     }
 

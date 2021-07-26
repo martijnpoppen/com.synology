@@ -9,6 +9,8 @@
     "error": "Keine DiskStations gefunden."
   },
   "diskstation": {
-    "wol": "Wake-On-Lan kann bis zu 10 Minuten dauern. Der Ein/Aus-Status zeigt “EIN” an, wenn die DiskStation erfolgreich gebootet wurde."
+    "wol": "Wake-On-Lan kann bis zu 10 Minuten dauern. Der Ein/Aus-Status zeigt “EIN” an, wenn die DiskStation erfolgreich gebootet wurde.",
+    "reboot": "Neustarten",
+    "shutdown": "Herunterfahren"
   }
 }

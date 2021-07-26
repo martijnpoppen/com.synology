@@ -5,11 +5,12 @@ Ontvang een melding wanneer een waarde is gewijzigd.
 
 Ondersteund:
 - DSM 6
+- DSM 7
 - Synology DiskStation
 
 Installatie:
 - Installeer deze app op je Homey.
-- Ga naar apparaat toevoegen - Vul IP in - Gebruikersnaam - Wachtwoord
+- Ga naar apparaat toevoegen - Vul IP in - Gebruikersnaam - Wachtwoord - (2FA optioneel)
 - Gegevens worden opgehaald.
 - Controleer status of creëer flows.
 
