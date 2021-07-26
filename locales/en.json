@@ -2,7 +2,7 @@
   "pair": {
     "username": "Username",
     "password": "Password",
-    "otp": "2FA Code",
+    "otp": "2FA Code (optional)",
     "ip": "IP Address (local IP - SSL: OFF)",
     "secure": "Use SSL connection",
     "port": "Port (optional - default: 5000)",
