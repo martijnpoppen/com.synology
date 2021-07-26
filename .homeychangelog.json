@@ -37,5 +37,8 @@
   },
   "1.1.6": {
     "en": "FIX: update support link"
+  },
+  "1.2.0": {
+    "en": "NEW: add 2FA"
   }
 }
