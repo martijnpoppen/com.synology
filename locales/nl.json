@@ -2,6 +2,7 @@
   "pair": {
     "username": "Gebruikersnaam",
     "password": "Wachtwoord",
+    "otp": "2FA Code",
     "ip": "IP Addres (Lokaal IP - SSL: UIT)",
     "secure": "Gebruik SSL verbinding",
     "port": "Poort (optioneel - standaard: 5000)",

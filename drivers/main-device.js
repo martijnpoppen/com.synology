@@ -25,7 +25,7 @@ module.exports = class mainDevice extends Homey.Device {
         await this.setCapabilityValuesInterval();
 
         await this.setAvailable();
-  }
+    }
 
     async onSettings({ oldSettings, newSettings, changedKeys }) {
         this.homey.app.log(`[Device] ${this.getName()} - oldSettings`, oldSettings);
@@ -252,5 +252,10 @@ module.exports = class mainDevice extends Homey.Device {
             this.setUnavailable(error)
             this.homey.app.log(error);
         }
+    }
+
+    onDeleted() {
+        clearInterval(this.onPollInterval);
+        clearInterval(this.onOnOffPollInterval);
     }
 }

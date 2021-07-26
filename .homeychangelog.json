@@ -31,5 +31,11 @@
   },
   "1.1.4": {
     "en": "Synology app release"
+  },
+  "1.1.5": {
+    "en": "FIX: readme translations"
+  },
+  "1.1.6": {
+    "en": "FIX: update support link"
   }
 }

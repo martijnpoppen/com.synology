@@ -1,7 +1,6 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
 const { rand, sleep } = require('../lib/helpers');
-let _synoClient = undefined;
 
 module.exports = class mainDriver extends Homey.Driver {
     onInit() {
@@ -24,16 +23,29 @@ module.exports = class mainDriver extends Homey.Driver {
                     port: parseInt(data.port) || (data.secure ? 5001 : 5000),
                     user: data.username,
                     passwd: data.password,
+                    otp_code: parseInt(data.otp) || null,
+                    device_id: null,
                     version: 6,
                     timeout: 3000
                 };
                 this.homey.app.log(`[Driver] - got config`, this.config);
     
-                _synoClient = await new Synology(this.config);
+                this._synoClient = await new Synology(this.config);
+
+                if(this.config.otp_code) {
+                    this.synoLogin = await this._synoClient._login();
+                    this.homey.app.log(`[Driver] - synoLogin`, this.synoLogin);
+                    if(this.synoLogin && this.synoLogin.did) {
+                        this.config.device_id = this.synoLogin.did;
+                        this.config.otp_code = null;
+                        
+                        this._synoClient = await new Synology(this.config);
+                    }
+                }
                 
-                this.synoData = await _synoClient.getInfo();
+                this.synoData = await this._synoClient.getInfo();
     
-                if(!this.synoData && !this.synoData.model) {
+                if(this.synoData && this.synoData.error) {
                     throw new Error(this.homey.__('pair.error'));
                 }
             } catch (error) {
@@ -47,6 +59,10 @@ module.exports = class mainDriver extends Homey.Driver {
             const random = rand();
             let results = [];
             let pairedDriverDevices = [];
+
+            if(this.synoData && this.synoData.error) {
+                throw new Error(this.homey.__('pair.error'));
+            }
 
             this.homey.app.getDevices().forEach((device) => {
                 const data = device.getData();

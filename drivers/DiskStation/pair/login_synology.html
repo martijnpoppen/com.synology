@@ -45,6 +45,11 @@
     </div>
 
     <div class="hy-tmpl-login_synology-row row">
+        <label class="hy-label hy-tmpl-login_synology-label" for="otp" data-i18n="pair.otp"></label>
+        <input class="hy-input-text" name="otp" type="number" value="">
+    </div>
+
+    <div class="hy-tmpl-login_synology-row row">
         <label class="hy-label hy-tmpl-login_synology-label" for="ipAddress" data-i18n="pair.ip"></label>
         <input class="hy-input-text" name="ipAddress" type="text" value="" placeholder="192.168.178.10">
     </div>
@@ -73,6 +78,7 @@
         p = e.querySelector('input[name="ipAddress"]'),
         s = e.querySelector('input[name="secure"]'),
         pp = e.querySelector('input[name="port"]'),
+        otp = e.querySelector('input[name="otp"]'),
         m = !1; 
         Homey.setTitle(Homey.__("$tmpl.login_credentials.title")),
         o.addEventListener("submit", function (e) { 
@@ -83,9 +89,10 @@
                 r = n.value,
                 q = p.value,
                 qq = pp.value,
+                otpp = otp.value,
                 t = s.checked; 
 
-                return Homey.emit("login", { username: z, password: r, ipAddress: q, port: qq, secure: t }, function (e, o) { 
+                return Homey.emit("login", { username: z, password: r, otp: otpp, ipAddress: q, port: qq, secure: t }, function (e, o) { 
                     if(e) {
                         Homey.error(e)
                     } else if(z) {
