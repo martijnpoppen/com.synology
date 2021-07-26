@@ -3,6 +3,7 @@
     "username": "Benutzername",
     "password": "Passwort",
     "ip": "IP-Adresse (Lokale-IP)",
+    "secure": "SSL-Verbindung verwenden",
     "port": "Port (Optional - ursprünglich: 5000)",
     "error": "Keine DiskStations gefunden."
   },

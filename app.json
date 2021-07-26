@@ -137,6 +137,16 @@
           "value": 5000
         },
         {
+          "id": "secure",
+          "type": "checkbox",
+          "label": {
+            "en": "SSL",
+            "nl": "SSL",
+            "de": "SSL"
+          },
+          "value": false
+        },
+        {
           "id": "user",
           "type": "text",
           "label": {
