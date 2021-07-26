@@ -11,7 +11,7 @@ module.exports = class mainDevice extends Homey.Device {
 		this.homey.app.log('[Device] - init =>', this.getName());
         this.homey.app.setDevices(this);
 
-        if(!settings.mac || !settings.mac.length) {
+        if(!settings.mac || settings.mac.length < 8) {
             await this.findMacAddress();
         }
 
