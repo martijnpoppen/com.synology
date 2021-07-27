@@ -70,5 +70,11 @@
   },
   "1.4.4": {
     "en": "FIX: duplicate data issue with multiple devices"
+  },
+  "1.4.5": {
+    "en": "FIX: device was unavailable after shutdown."
+  },
+  "1.4.6": {
+    "en": "FIX: shutdown message"
   }
 }
