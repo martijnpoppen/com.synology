@@ -58,5 +58,17 @@
   },
   "1.4.0": {
     "en": "NEW: add always-on to device settings"
+  },
+  "1.4.1": {
+    "en": "FIX: i18n"
+  },
+  "1.4.2": {
+    "en": "FIX: duplicate flow actions"
+  },
+  "1.4.3": {
+    "en": "FIX: add verbose debug logging"
+  },
+  "1.4.4": {
+    "en": "FIX: duplicate data issue with multiple devices"
   }
 }
