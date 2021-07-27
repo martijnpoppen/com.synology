@@ -1,6 +1,5 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
-const { rand, sleep } = require('../lib/helpers');
 
 module.exports = class mainDriver extends Homey.Driver {
     onInit() {
@@ -51,7 +50,6 @@ module.exports = class mainDriver extends Homey.Driver {
 
         session.setHandler("list_devices", async () => {
             const deviceType = this.deviceType();
-            const random = rand();
             let results = [];
             let pairedDriverDevices = [];
 
@@ -67,7 +65,7 @@ module.exports = class mainDriver extends Homey.Driver {
             });
 
             this.homey.app.log(`[Driver] ${this.id} - pairedDriverDevices`, pairedDriverDevices);
-            if(!pairedDriverDevices.includes(`${this.id}-${this.config.account}-${random}`)) {
+            if(!pairedDriverDevices.includes(`${this.id}-${this.synoData.serial}`)) {
                 results.push({
                     name: `Synology ${deviceType} - ${this.synoData.model}`,
                     data: {

@@ -1,9 +1,6 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
 const { sleep } = require('../lib/helpers');
-const flowActions = require('../lib/flows/actions');
-
-let _synoClient = undefined;
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -19,7 +16,6 @@ module.exports = class mainDevice extends Homey.Device {
         await this.checkCapabilities();
 
         await this.setSynoClient();
-        await flowActions.init(this.homey);
 
         this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
         this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
@@ -52,7 +48,7 @@ module.exports = class mainDevice extends Homey.Device {
         };
         this.homey.app.log(`[Device] - ${this.getName()} => setSynoClient Got config`, this.config);
 
-        _synoClient = await new Synology(this.config);
+        this._synoClient = await new Synology(this.config);
     }
 
     async checkCapabilities() {
@@ -115,12 +111,12 @@ module.exports = class mainDevice extends Homey.Device {
 
             if(value) {
                 this.homey.app.log(`[Device] ${this.getName()} - onoff - wakeUp`);
-                _synoClient.wakeUp();
+                this._synoClient.wakeUp();
 
                 await this.setWarning(this.homey.__("diskstation.wol"));
             } else {
                 this.homey.app.log(`[Device] ${this.getName()} - onoff - shutdown`);
-                _synoClient.shutdown();
+                this._synoClient.shutdown();
 
                 this.setUnavailable(this.homey.__("diskstation.shutdown"));
             }
@@ -139,7 +135,7 @@ module.exports = class mainDevice extends Homey.Device {
            this.setStoreValue('rebooting', true);
            this.setCapabilityValue('action_reboot', false);
 
-           _synoClient.shutdown();
+           this._synoClient.shutdown();
            
            this.setUnavailable(this.homey.__("diskstation.reboot"));
 
@@ -152,7 +148,7 @@ module.exports = class mainDevice extends Homey.Device {
 
     async checkOnOffState() {
         try {  
-            const powerState = await _synoClient.getPowerState();
+            const powerState = await this._synoClient.getPowerState();
 
             this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, powerState);
 
@@ -180,7 +176,7 @@ module.exports = class mainDevice extends Homey.Device {
             await this.setAvailable();
         } else if(!isOn && this.getStoreValue('rebooting')) {
             this.homey.app.log(`[Device] ${this.getName()} - checkRebootState - wakeUp`);
-            _synoClient.wakeUp();
+            this._synoClient.wakeUp();
         }
     }
 
@@ -208,9 +204,9 @@ module.exports = class mainDevice extends Homey.Device {
                 return;
             }
 
-            const deviceInfo = await _synoClient.getInfo();
-            const diskUsageInfo = await _synoClient.getDiskUsage();
-            const systemUsageInfo = await _synoClient.getSystemUsage();
+            const deviceInfo = await this._synoClient.getInfo();
+            const diskUsageInfo = await this._synoClient.getDiskUsage();
+            const systemUsageInfo = await this._synoClient.getSystemUsage();
 
             if(deviceInfo.error || diskUsageInfo.error || systemUsageInfo.error) {
                 throw new Error(deviceInfo.error)
