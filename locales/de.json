@@ -6,11 +6,14 @@
     "ip": "IP-Adresse (Lokale-IP - SSL: Aus)",
     "secure": "SSL-Verbindung verwenden",
     "port": "Port (Optional - ursprünglich: 5000)",
-    "error": "Keine DiskStations gefunden."
+    "login": "Anmelden",
+    "error": "Etwas ist schief gelaufen. Überprüfen Sie Ihr Login und 2FA (optional)",
+    "error_empty": "Keine DiskStations gefunden."
   },
   "diskstation": {
     "wol": "Wake-On-Lan kann bis zu 10 Minuten dauern. Der Ein/Aus-Status zeigt “EIN” an, wenn die DiskStation erfolgreich gebootet wurde.",
     "reboot": "Neustarten",
-    "shutdown": "Herunterfahren"
+    "shutdown": "Herunterfahren",
+    "override_onoff": "DiskStation is immer-auf"
   }
 }

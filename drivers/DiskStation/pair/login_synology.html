@@ -66,7 +66,7 @@
 
     <div class="hy-tmpl-login_synology-row row">
         <input class="hy-button hy-button-primary hy-button-fill hy-tmpl-login_synology-submit button" type="submit"
-            value="Inloggen">
+            value="">
     </div>
 </form>
 <script type="text/javascript">!function () {
@@ -79,8 +79,10 @@
         s = e.querySelector('input[name="secure"]'),
         pp = e.querySelector('input[name="port"]'),
         otp = e.querySelector('input[name="otp"]'),
+        lgn = e.querySelector('input[type="submit"]'),
         m = !1; 
         Homey.setTitle(Homey.__("$tmpl.login_credentials.title")),
+        lgn.value = Homey.__("pair.login");
         o.addEventListener("submit", function (e) { 
             if (e.preventDefault(), !m) { 
                 m = !0, 

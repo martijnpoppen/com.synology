@@ -44,14 +44,9 @@ module.exports = class mainDriver extends Homey.Driver {
                 }
                 
                 this.synoData = await this._synoClient.getInfo();
-    
-                if(this.synoData && this.synoData.error) {
-                    throw new Error(this.homey.__('pair.error'));
-                }
             } catch (error) {
-                this.homey.app.log(error);
+                throw new Error(this.homey.__('pair.error'));
             }
-           
         });
 
         session.setHandler("list_devices", async () => {
@@ -60,8 +55,10 @@ module.exports = class mainDriver extends Homey.Driver {
             let results = [];
             let pairedDriverDevices = [];
 
-            if(this.synoData && this.synoData.error) {
+            if(this.synoData && this.synoData.hasOwnProperty('error')) {
                 throw new Error(this.homey.__('pair.error'));
+            } else if(this.synoData && !this.synoData.hasOwnProperty('model')) {
+                throw new Error(this.homey.__('pair.error_empty'));
             }
 
             this.homey.app.getDevices().forEach((device) => {

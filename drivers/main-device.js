@@ -19,6 +19,7 @@ module.exports = class mainDevice extends Homey.Device {
         await this.checkCapabilities();
 
         await this.setSynoClient();
+        await flowActions.init(this.homey);
 
         this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
         this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
@@ -52,8 +53,6 @@ module.exports = class mainDevice extends Homey.Device {
         this.homey.app.log(`[Device] - ${this.getName()} => setSynoClient Got config`, this.config);
 
         _synoClient = await new Synology(this.config);
-
-        await flowActions.init(this.homey);
     }
 
     async checkCapabilities() {
@@ -107,7 +106,13 @@ module.exports = class mainDevice extends Homey.Device {
     }
 
     async onCapability_ON_OFF(value) {
+        const settings = this.getSettings();
+
         try {
+            if(!value && settings && settings.override_onoff) {
+                throw new Error(this.homey.__("diskstation.override_onoff"));
+            }
+
             if(value) {
                 this.homey.app.log(`[Device] ${this.getName()} - onoff - wakeUp`);
                 _synoClient.wakeUp();
@@ -122,7 +127,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             return Promise.resolve(true);
         } catch (e) {
-            Homey.app.error(e);
+            this.homey.app.error(e);
             return Promise.reject(e);
         }
     }
@@ -140,7 +145,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             return Promise.resolve(true);
         } catch (e) {
-            Homey.app.error(e);
+            this.homey.app.error(e);
             return Promise.reject(e);
         }
     }
@@ -213,7 +218,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             const {temperature, temperature_warn, uptime, ram} = deviceInfo;
             const { disk_usage } = await this.setDiskUsage(diskUsageInfo);
-            const { cpu_load } = await this.setCpuLoad(systemUsageInfo);
+            const { cpu_load, ram_load } = await this.setLoad(systemUsageInfo);
 
             this.homey.app.log(`[Device] ${this.getName()} - deviceInfo =>`, deviceInfo);
             this.homey.app.log(`[Device] ${this.getName()} - diskUsageInfo =>`, diskUsageInfo);
@@ -223,6 +228,7 @@ module.exports = class mainDevice extends Homey.Device {
             await this.setCapabilityValue('measure_uptime', parseInt(uptime) / 3600);
             await this.setCapabilityValue('measure_disk_usage', parseInt(disk_usage));
             await this.setCapabilityValue('measure_cpu_usage', parseInt(cpu_load));
+            await this.setCapabilityValue('measure_ram_usage', parseInt(ram_load));
             
             this.homey.app.log(`[Device] ${this.getName()} - setCapabilityValues =>`, this.getCapabilities());
         } catch (error) {
@@ -273,19 +279,21 @@ module.exports = class mainDevice extends Homey.Device {
         }
     }
 
-    async setCpuLoad(data) {
+    async setLoad(data) {
         try {
             const settings = this.getSettings();
-            let load = 0;
+            let cpu_load = 0;
+            let ram_load = 0;
 
             if (settings.version >= 6) {
-                load = data.cpu['other_load'] + data.cpu['system_load'] + data.cpu['user_load'];
+                cpu_load = data.cpu['other_load'] + data.cpu['system_load'] + data.cpu['user_load'];
+                ram_load = data.memory.real_usage;
             } else {
-                load = Math.round(data.cpu.user * 100);
+                cpu_load = Math.round(data.cpu.user * 100);
             }
     
-            const usage = {cpu_load: load};
-            this.homey.app.log(`[Device] ${this.getName()} - cpu_load`, load);
+            const usage = {cpu_load, ram_load};
+            this.homey.app.log(`[Device] ${this.getName()} - setLoad`, usage);
 
             return usage;
         } catch (error) {
