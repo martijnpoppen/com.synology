@@ -52,5 +52,11 @@
   },
   "1.3.3": {
     "en": "ADD approximation power usage"
+  },
+  "1.3.4": {
+    "en": "FIX: issue with login"
+  },
+  "1.4.0": {
+    "en": "NEW: add always-on to device settings"
   }
 }

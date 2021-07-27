@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -119,74 +119,94 @@
       ],
       "settings": [
         {
-          "id": "mac",
-          "type": "text",
+          "type": "group",
           "label": {
-            "en": "MAC Addres",
-            "nl": "MAC Adres",
-            "de": "MAC-Adresse"
+            "en": "General settings",
+            "nl": "Algemene instellingen",
+            "de": "Allgemeine einstellungen"
           },
-          "value": ""
+          "children": [
+            {
+              "id": "override_onoff",
+              "type": "checkbox",
+              "label": {
+                "en": "Always on",
+                "nl": "Altijd aan",
+                "de": "Immer auf"
+              },
+              "value": false
+            }
+          ]
         },
         {
-          "id": "ip",
-          "type": "text",
+          "type": "group",
           "label": {
-            "en": "IP Address",
-            "nl": "IP Adres",
-            "de": "IP-Adresse"
+            "en": "Login settings",
+            "nl": "Login instellingen",
+            "de": "Login einstellungen"
           },
-          "value": ""
-        },
-        {
-          "id": "port",
-          "type": "number",
-          "label": {
-            "en": "Port",
-            "nl": "Poort",
-            "de": "Port"
-          },
-          "value": 5000
-        },
-        {
-          "id": "secure",
-          "type": "checkbox",
-          "label": {
-            "en": "SSL",
-            "nl": "SSL",
-            "de": "SSL"
-          },
-          "value": false
-        },
-        {
-          "id": "user",
-          "type": "text",
-          "label": {
-            "en": "User",
-            "nl": "Gebruiker",
-            "de": "Benutzer"
-          },
-          "value": ""
-        },
-        {
-          "id": "passwd",
-          "type": "password",
-          "label": {
-            "en": "Password",
-            "nl": "Wachtwoord",
-            "de": "Passwort"
-          },
-          "value": ""
-        },
-        {
-          "id": "debug",
-          "type": "checkbox",
-          "label": {
-            "en": "Debug Logs",
-            "nl": "Debug Logs",
-            "de": "Debug Logs"
-          },
-          "value": false
+          "children": [
+            {
+              "id": "mac",
+              "type": "text",
+              "label": {
+                "en": "MAC Addres",
+                "nl": "MAC Adres",
+                "de": "MAC-Adresse"
+              },
+              "value": ""
+            },
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "IP Address",
+                "nl": "IP Adres",
+                "de": "IP-Adresse"
+              },
+              "value": ""
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "label": {
+                "en": "Port",
+                "nl": "Poort",
+                "de": "Port"
+              },
+              "value": 5000
+            },
+            {
+              "id": "user",
+              "type": "text",
+              "label": {
+                "en": "User",
+                "nl": "Gebruiker",
+                "de": "Benutzer"
+              },
+              "value": ""
+            },
+            {
+              "id": "passwd",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord",
+                "de": "Passwort"
+              },
+              "value": ""
+            },
+            {
+              "id": "debug",
+              "type": "checkbox",
+              "label": {
+                "en": "Debug Logs",
+                "nl": "Debug Logs",
+                "de": "Debug Logs"
+              },
+              "value": false
+            }
+          ]
         }
       ]
     }
