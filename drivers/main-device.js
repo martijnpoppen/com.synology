@@ -111,14 +111,17 @@ module.exports = class mainDevice extends Homey.Device {
 
             if(value) {
                 this.homey.app.log(`[Device] ${this.getName()} - onoff - wakeUp`);
-                this._synoClient.wakeUp();
-
+                
+                await this._synoClient.wakeUp();
                 await this.setWarning(this.homey.__("diskstation.wol"));
             } else {
                 this.homey.app.log(`[Device] ${this.getName()} - onoff - shutdown`);
-                this._synoClient.shutdown();
+                
+                await this._synoClient.shutdown();
 
-                this.setUnavailable(this.homey.__("diskstation.shutdown"));
+                await this.setUnavailable(this.homey.__("diskstation.shutdown"));
+                
+                await sleep(6000);
             }
 
             return Promise.resolve(true);
@@ -159,11 +162,11 @@ module.exports = class mainDevice extends Homey.Device {
                 await this.setCapabilityValue('onoff', false);
             }
 
-            this.checkRebootState();
+            await this.checkRebootState();
         } catch (error) {
             this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, error);
             await this.setCapabilityValue('onoff', false);
-            this.checkRebootState();
+            await this.checkRebootState();
         }
     }
 
@@ -177,6 +180,8 @@ module.exports = class mainDevice extends Homey.Device {
         } else if(!isOn && this.getStoreValue('rebooting')) {
             this.homey.app.log(`[Device] ${this.getName()} - checkRebootState - wakeUp`);
             this._synoClient.wakeUp();
+        } else if(!this.getStoreValue('rebooting')) {
+            await this.setAvailable();
         }
     }
 
