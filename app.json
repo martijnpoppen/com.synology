@@ -78,6 +78,7 @@
       "capabilities": [
         "onoff",
         "action_reboot",
+        "action_update_data",
         "alarm_heat",
         "measure_temperature",
         "measure_uptime",
@@ -135,6 +136,33 @@
                 "de": "Immer an"
               },
               "value": false
+            },
+            {
+              "id": "update_interval",
+              "type": "number",
+              "label": {
+                "en": "Update interval",
+                "nl": "Update interval",
+                "de": "Update intervall"
+              },
+              "min": 30,
+              "max": 3600,
+              "units": {
+                "en": "seconds",
+                "nl": "seconden",
+                "de": "Sekunden"
+              },
+              "value": 120
+            },
+            {
+              "id": "enable_interval",
+              "type": "checkbox",
+              "label": {
+                "en": "Enable automatic data",
+                "nl": "Automatische gegevens ophalen",
+                "de": "Automatische Daten abrufen"
+              },
+              "value": true
             }
           ]
         },
@@ -230,6 +258,26 @@
             "type": "device",
             "name": "device",
             "filter": "capabilities=action_reboot"
+          }
+        ]
+      },
+      {
+        "id": "action_update_data_flow",
+        "title": {
+          "en": "Update data",
+          "nl": "Data updaten",
+          "de": "Daten aktualisieren"
+        },
+        "titleFormatted": {
+          "en": "[[device]] Update data",
+          "nl": "[[device]] Data updaten",
+          "de": "[[device]] Daten aktualisieren"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "capabilities=action_update_data"
           }
         ]
       }
@@ -438,6 +486,17 @@
         "en": "Reboot",
         "nl": "Herstarten",
         "de": "Neustarten"
+      },
+      "getable": false,
+      "setable": true,
+      "uiComponent": "button"
+    },
+    "action_update_data": {
+      "type": "boolean",
+      "title": {
+        "en": "Update data",
+        "nl": "Data updaten",
+        "de": "Daten aktualisieren"
       },
       "getable": false,
       "setable": true,

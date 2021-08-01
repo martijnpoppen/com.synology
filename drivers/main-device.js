@@ -19,9 +19,12 @@ module.exports = class mainDevice extends Homey.Device {
 
         this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
         this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
+        this.registerCapabilityListener('action_update_data', this.onCapability_UPDATE_DATA.bind(this));
 
-        await this.checkOnOffStateInterval();
-        await this.setCapabilityValuesInterval();
+        if(settings.enable_interval) {
+            await this.checkOnOffStateInterval(settings.update_interval);
+            await this.setCapabilityValuesInterval(settings.update_interval);
+        }
 
         await this.setAvailable();
     }
@@ -30,23 +33,23 @@ module.exports = class mainDevice extends Homey.Device {
         this.homey.app.log(`[Device] ${this.getName()} - oldSettings`, oldSettings);
         this.homey.app.log(`[Device] ${this.getName()} - newSettings`, newSettings);
 
-        if( this.onPollInterval ) {
-            clearInterval(this.onPollInterval);
+        if(this.onPollInterval || this.onOnOffPollInterval) {
+            this.clearIntervals();
         }
 
         await this.setSynoClient(newSettings);
-        await this.checkCapabilities();
-        await this.setCapabilityValuesInterval();
-      }
+
+        if(newSettings.enable_interval) {
+            await this.checkOnOffStateInterval(newSettings.update_interval);
+            await this.setCapabilityValuesInterval(newSettings.update_interval);
+        }
+    }
 
     async setSynoClient(overrideSettings = null) {
         const settings = overrideSettings ? overrideSettings : this.getSettings();
-        this.homey.app.log(`[Device] - ${this.getName()} => setSynoClient Got settings`, settings);
+        this.config = settings;
 
-        this.config = {
-            ...settings
-        };
-        this.homey.app.log(`[Device] - ${this.getName()} => setSynoClient Got config`, this.config);
+        this.homey.app.log(`[Device] - ${this.getName()} => setSynoClient Got config`, {...this.config, user: 'LOG', passwd: 'LOG'});
 
         this._synoClient = await new Synology(this.config);
     }
@@ -149,6 +152,22 @@ module.exports = class mainDevice extends Homey.Device {
         }
     }
 
+    async onCapability_UPDATE_DATA(value) {
+        try {
+           this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPDATE_DATA`, value);
+
+           this.setCapabilityValue('action_update_data', false);
+
+           this.checkOnOffState();
+           this.setCapabilityValues();
+
+            return Promise.resolve(true);
+        } catch (e) {
+            this.homey.app.error(e);
+            return Promise.reject(e);
+        }
+    }
+
     async checkOnOffState() {
         try {  
             const powerState = await this._synoClient.getPowerState();
@@ -185,11 +204,11 @@ module.exports = class mainDevice extends Homey.Device {
         }
     }
 
-    async checkOnOffStateInterval() {
+    async checkOnOffStateInterval(update_interval) {
         try {  
-            const REFRESH_INTERVAL = 1000 * (0.5 * 60);
+            const REFRESH_INTERVAL = 1000 * update_interval;
 
-            this.homey.app.log(`[Device] ${this.getName()} - onOnOffPollInterval =>`, REFRESH_INTERVAL);
+            this.homey.app.log(`[Device] ${this.getName()} - onOnOffPollInterval =>`, REFRESH_INTERVAL, update_interval);
             this.onOnOffPollInterval = setInterval(this.checkOnOffState.bind(this), REFRESH_INTERVAL);
 
             await this.checkOnOffState();
@@ -230,18 +249,16 @@ module.exports = class mainDevice extends Homey.Device {
             await this.setCapabilityValue('measure_disk_usage', parseInt(disk_usage));
             await this.setCapabilityValue('measure_cpu_usage', parseInt(cpu_load));
             await this.setCapabilityValue('measure_ram_usage', parseInt(ram_load));
-            
-            this.homey.app.log(`[Device] ${this.getName()} - setCapabilityValues =>`, this.getCapabilities());
         } catch (error) {
             this.homey.app.log(error);
         }
     }
 
-    async setCapabilityValuesInterval() {
+    async setCapabilityValuesInterval(update_interval) {
         try {  
-            const REFRESH_INTERVAL = 1000 * (2 * 60);
+            const REFRESH_INTERVAL = 1000 * update_interval;
 
-            this.homey.app.log(`[Device] ${this.getName()} - onPollInterval =>`, REFRESH_INTERVAL);
+            this.homey.app.log(`[Device] ${this.getName()} - onPollInterval =>`, REFRESH_INTERVAL, update_interval);
             this.onPollInterval = setInterval(this.setCapabilityValues.bind(this), REFRESH_INTERVAL);
 
             await this.setCapabilityValues();
@@ -303,8 +320,14 @@ module.exports = class mainDevice extends Homey.Device {
         }
     }
 
+    async clearIntervals() {
+        this.homey.app.log(`[Device] ${this.getName()} - clearIntervals`);
+
+        await clearInterval(this.onPollInterval);
+        await clearInterval(this.onOnOffPollInterval);
+    }
+
     onDeleted() {
-        clearInterval(this.onPollInterval);
-        clearInterval(this.onOnOffPollInterval);
+        this.clearIntervals();
     }
 }
