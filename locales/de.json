@@ -5,7 +5,7 @@
     "otp": "2FA Code (optional)",
     "ip": "IP-Adresse (Lokale-IP - SSL: Aus)",
     "secure": "SSL-Verbindung verwenden",
-    "port": "Port (Optional - ursprünglich: 5000)",
+    "port": "Port (Optional - ursprünglich: 5000 / SSL: 5001)",
     "login": "Anmelden",
     "error": "Etwas ist schief gelaufen. Überprüfen Sie Ihr Login und 2FA (optional)",
     "error_empty": "Keine DiskStations gefunden."

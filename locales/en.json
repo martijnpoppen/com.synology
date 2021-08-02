@@ -5,7 +5,7 @@
     "otp": "2FA Code (optional)",
     "ip": "IP Address (local IP - SSL: OFF)",
     "secure": "Use SSL connection",
-    "port": "Port (optional - default: 5000)",
+    "port": "Port (optional - default: 5000 / SSL: 5001)",
     "login": "Login",
     "error": "Something went wrong. Check your login and 2FA (optional)",
     "error_empty": "No DiskStations found."
