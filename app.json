@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -203,6 +203,16 @@
                 "de": "Port"
               },
               "value": 5000
+            },
+            {
+              "id": "secure",
+              "type": "checkbox",
+              "label": {
+                "en": "SSL",
+                "nl": "SSL",
+                "de": "SSL"
+              },
+              "value": false
             },
             {
               "id": "user",

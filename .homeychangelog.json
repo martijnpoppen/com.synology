@@ -79,5 +79,8 @@
   },
   "1.5.0": {
     "en": "NEW: add update interval setting - add enable/disable auto update - add manual update flowcard/button"
+  },
+  "1.5.1": {
+    "en": "ADD: SSL option"
   }
 }
