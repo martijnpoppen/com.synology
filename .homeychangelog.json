@@ -82,5 +82,8 @@
   },
   "1.5.1": {
     "en": "ADD: SSL option"
+  },
+  "1.5.2": {
+    "en": "FIX: check reboot state when interval is disabled"
   }
 }
