@@ -21,6 +21,9 @@ module.exports = class mainDevice extends Homey.Device {
         this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
         this.registerCapabilityListener('action_update_data', this.onCapability_UPDATE_DATA.bind(this));
 
+        await this.checkOnOffState();
+        await this.setCapabilityValues();
+
         if(settings.enable_interval) {
             await this.checkOnOffStateInterval(settings.update_interval);
             await this.setCapabilityValuesInterval(settings.update_interval);
@@ -122,7 +125,9 @@ module.exports = class mainDevice extends Homey.Device {
                 
                 await this._synoClient.shutdown();
 
-                await this.setUnavailable(this.homey.__("diskstation.shutdown"));
+                if(settings.enable_interval) {
+                    await this.setUnavailable(this.homey.__("diskstation.shutdown"));
+                }
                 
                 await sleep(6000);
             }
@@ -141,9 +146,12 @@ module.exports = class mainDevice extends Homey.Device {
            this.setStoreValue('rebooting', true);
            this.setCapabilityValue('action_reboot', false);
 
-           this._synoClient.shutdown();
+           await this._synoClient.shutdown();
            
            this.setUnavailable(this.homey.__("diskstation.reboot"));
+
+           await this.clearIntervals();
+           this.checkOnOffStateInterval(60);
 
             return Promise.resolve(true);
         } catch (e) {
@@ -190,15 +198,27 @@ module.exports = class mainDevice extends Homey.Device {
     }
 
     async checkRebootState() {
+        const settings = this.getSettings();
         const isOn = await this.getCapabilityValue('onoff');
         
         if(isOn && this.getStoreValue('rebooting')) {
             this.homey.app.log(`[Device] ${this.getName()} - checkRebootState - reboot done`);
             this.setStoreValue('rebooting', false);
+            
             await this.setAvailable();
+            
+            await this.clearIntervals();
+
+            if(settings.enable_interval) {
+                await this.checkOnOffStateInterval(newSettings.update_interval);
+                await this.setCapabilityValuesInterval(newSettings.update_interval);
+            }
+
         } else if(!isOn && this.getStoreValue('rebooting')) {
             this.homey.app.log(`[Device] ${this.getName()} - checkRebootState - wakeUp`);
+            
             this._synoClient.wakeUp();
+
         } else if(!this.getStoreValue('rebooting')) {
             await this.setAvailable();
         }
@@ -210,8 +230,6 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.homey.app.log(`[Device] ${this.getName()} - onOnOffPollInterval =>`, REFRESH_INTERVAL, update_interval);
             this.onOnOffPollInterval = setInterval(this.checkOnOffState.bind(this), REFRESH_INTERVAL);
-
-            await this.checkOnOffState();
         } catch (error) {
             this.setUnavailable(error)
             this.homey.app.log(error);
@@ -260,8 +278,6 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.homey.app.log(`[Device] ${this.getName()} - onPollInterval =>`, REFRESH_INTERVAL, update_interval);
             this.onPollInterval = setInterval(this.setCapabilityValues.bind(this), REFRESH_INTERVAL);
-
-            await this.setCapabilityValues();
         } catch (error) {
             this.setUnavailable(error)
             this.homey.app.log(error);
