@@ -85,5 +85,14 @@
   },
   "1.5.2": {
     "en": "FIX: check reboot state when interval is disabled"
+  },
+  "1.6.0": {
+    "en": "NEW: add hashed passwords (hide in homey developer tools) - Remove redundant dependency"
+  },
+  "1.6.1": {
+    "en": "NEW: add hashed passwords (hide in homey developer tools) - Remove redundant dependency"
+  },
+  "1.6.2": {
+    "en": "NEW: add hashed passwords (hide in homey developer tools) - Remove redundant dependency"
   }
 }
