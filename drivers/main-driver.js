@@ -1,5 +1,6 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
+const { encrypt } = require('../lib/helpers');
 
 module.exports = class mainDriver extends Homey.Driver {
     onInit() {
@@ -24,6 +25,7 @@ module.exports = class mainDriver extends Homey.Driver {
                     passwd: data.password,
                     otp_code: parseInt(data.otp) || null,
                     device_id: null,
+                    encrypted_password: true,
                     version: 6,
                     timeout: 3000
                 };
@@ -72,7 +74,8 @@ module.exports = class mainDriver extends Homey.Driver {
                         id: `${this.id}-${this.synoData.serial}`,
                     },
                     settings: {
-                        ...this.config
+                        ...this.config,
+                        passwd: encrypt(this.config.passwd)
                     }
                 });
             }

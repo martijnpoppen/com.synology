@@ -1,6 +1,6 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
-const { sleep } = require('../lib/helpers');
+const { sleep, decrypt, encrypt } = require('../lib/helpers');
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -11,6 +11,10 @@ module.exports = class mainDevice extends Homey.Device {
 
         if(!settings.mac || settings.mac.length < 8) {
             await this.findMacAddress();
+        }
+
+        if(!settings.encrypted_password) {
+            await this.setSettings({...settings, passwd: encrypt(settings.passwd), encrypted_password: true });
         }
 
         await this.checkCapabilities();
@@ -33,14 +37,19 @@ module.exports = class mainDevice extends Homey.Device {
     }
 
     async onSettings({ oldSettings, newSettings, changedKeys }) {
-        this.homey.app.log(`[Device] ${this.getName()} - oldSettings`, oldSettings);
-        this.homey.app.log(`[Device] ${this.getName()} - newSettings`, newSettings);
+        this.homey.app.log(`[Device] ${this.getName()} - oldSettings`, {...oldSettings, user: 'LOG', passwd: 'LOG'});
+        this.homey.app.log(`[Device] ${this.getName()} - newSettings`, {...newSettings, user: 'LOG', passwd: 'LOG'});
 
         if(this.onPollInterval || this.onOnOffPollInterval) {
             this.clearIntervals();
         }
 
-        await this.setSynoClient(newSettings);
+        if(newSettings.passwd !== oldSettings.passwd) {
+            await this.setSynoClient({...newSettings, passwd: encrypt(newSettings.passwd)});
+            await this.setSettings({...newSettings, passwd: encrypt(newSettings.passwd)});
+        } else {
+            await this.setSynoClient(newSettings);
+        }
 
         if(newSettings.enable_interval) {
             await this.checkOnOffStateInterval(newSettings.update_interval);
@@ -50,7 +59,7 @@ module.exports = class mainDevice extends Homey.Device {
 
     async setSynoClient(overrideSettings = null) {
         const settings = overrideSettings ? overrideSettings : this.getSettings();
-        this.config = settings;
+        this.config = {...settings, passwd: decrypt(settings.passwd)};
 
         this.homey.app.log(`[Device] - ${this.getName()} => setSynoClient Got config`, {...this.config, user: 'LOG', passwd: 'LOG'});
 
