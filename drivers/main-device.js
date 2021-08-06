@@ -14,7 +14,10 @@ module.exports = class mainDevice extends Homey.Device {
         }
 
         if(!settings.encrypted_password) {
-            await this.setSettings({...settings, passwd: encrypt(settings.passwd), encrypted_password: true });
+            await this.savePassword({...settings, encrypted_password: true, encrypted_password_fix: true });
+        } else if(!settings.encrypted_password_fix) {
+            this.homey.app.log(`[Device] ${this.getName()} - savePassword - Fix exposed key`);
+            await this.savePassword({...settings, passwd: decrypt(settings.passwd, true), encrypted_password_fix: true });
         }
 
         await this.checkCapabilities();
@@ -46,7 +49,6 @@ module.exports = class mainDevice extends Homey.Device {
 
         if(newSettings.passwd !== oldSettings.passwd) {
             await this.setSynoClient({...newSettings, passwd: encrypt(newSettings.passwd)});
-            await this.setSettings({...newSettings, passwd: encrypt(newSettings.passwd)});
         } else {
             await this.setSynoClient(newSettings);
         }
@@ -55,6 +57,15 @@ module.exports = class mainDevice extends Homey.Device {
             await this.checkOnOffStateInterval(newSettings.update_interval);
             await this.setCapabilityValuesInterval(newSettings.update_interval);
         }
+
+        if(newSettings.passwd !== oldSettings.passwd) {
+            this.savePassword(newSettings);
+        }
+    }
+
+    async savePassword(settings) {
+        this.homey.app.log(`[Device] ${this.getName()} - savePassword - encrypted`);
+        await this.setSettings({...settings, passwd: encrypt(settings.passwd)});
     }
 
     async setSynoClient(overrideSettings = null) {
@@ -64,6 +75,7 @@ module.exports = class mainDevice extends Homey.Device {
         this.homey.app.log(`[Device] - ${this.getName()} => setSynoClient Got config`, {...this.config, user: 'LOG', passwd: 'LOG'});
 
         this._synoClient = await new Synology(this.config);
+
     }
 
     async checkCapabilities() {
