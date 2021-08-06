@@ -94,5 +94,8 @@
   },
   "1.6.2": {
     "en": "NEW: add hashed passwords (hide in homey developer tools) - Remove redundant dependency"
+  },
+  "1.6.3": {
+    "en": "FIX: new secret key for password encryption"
   }
 }
