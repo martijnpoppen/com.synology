@@ -26,6 +26,7 @@ module.exports = class mainDriver extends Homey.Driver {
                     otp_code: parseInt(data.otp) || null,
                     device_id: null,
                     encrypted_password: true,
+                    encrypted_password_fix: true,
                     version: 6,
                     timeout: 3000
                 };

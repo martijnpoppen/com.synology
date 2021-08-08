@@ -15,9 +15,6 @@ module.exports = class mainDevice extends Homey.Device {
 
         if(!settings.encrypted_password) {
             await this.savePassword({...settings, encrypted_password: true, encrypted_password_fix: true });
-        } else if(!settings.encrypted_password_fix) {
-            this.homey.app.log(`[Device] ${this.getName()} - savePassword - Fix exposed key`);
-            await this.savePassword({...settings, passwd: decrypt(settings.passwd, true), encrypted_password_fix: true });
         }
 
         await this.checkCapabilities();
