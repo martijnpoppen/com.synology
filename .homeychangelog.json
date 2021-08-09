@@ -103,5 +103,8 @@
   },
   "1.6.5": {
     "en": "FIX: invalid_setting_type bug"
+  },
+  "1.6.6": {
+    "en": "ADD days/hours/minutes for time"
   }
 }

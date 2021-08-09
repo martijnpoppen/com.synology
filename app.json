@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -82,9 +82,10 @@
         "alarm_heat",
         "measure_temperature",
         "measure_uptime",
-        "measure_disk_usage",
+        "measure_uptime_days",
         "measure_cpu_usage",
-        "measure_ram_usage"
+        "measure_ram_usage",
+        "measure_disk_usage"
       ],
       "energy": {
         "approximation": {
@@ -342,6 +343,23 @@
           }
         ]
       }
+    },
+    "measure_uptime_days": {
+      "type": "string",
+      "title": {
+        "en": "Up-Time",
+        "nl": "Online tijd",
+        "de": "Laufzeit"
+      },
+      "units": {
+        "en": "Hours",
+        "nl": "Uur",
+        "de": "Stunden"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/stopwatch.svg"
     },
     "measure_disk_usage": {
       "type": "number",
