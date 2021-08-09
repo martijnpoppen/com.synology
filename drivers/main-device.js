@@ -1,6 +1,6 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
-const { sleep, decrypt, encrypt } = require('../lib/helpers');
+const { sleep, decrypt, encrypt, splitTime } = require('../lib/helpers');
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -82,17 +82,22 @@ module.exports = class mainDevice extends Homey.Device {
         const deviceCapabilities = this.getCapabilities();
 
         this.homey.app.log(`[Device] ${this.getName()} - Found capabilities =>`, deviceCapabilities);
+        this.homey.app.log(`[Device] ${this.getName()} - Driver capabilities =>`, driverCapabilities);
         
-        if(driverCapabilities.length > deviceCapabilities.length) {      
-            await this.updateCapabilities(driverCapabilities);
+        if(deviceCapabilities.length !== driverCapabilities.length) {      
+            await this.updateCapabilities(driverCapabilities, deviceCapabilities);
         }
 
         return deviceCapabilities;
     }
 
-    async updateCapabilities(driverCapabilities) {
+    async updateCapabilities(driverCapabilities, deviceCapabilities) {
         this.homey.app.log(`[Device] ${this.getName()} - Add new capabilities =>`, driverCapabilities);
         try {
+            deviceCapabilities.forEach(c => {
+                this.removeCapability(c);
+            });
+            await sleep(2000);
             driverCapabilities.forEach(c => {
                 this.addCapability(c);
             });
@@ -282,6 +287,7 @@ module.exports = class mainDevice extends Homey.Device {
             await this.setCapabilityValue('alarm_heat', !!temperature_warn);
             await this.setCapabilityValue('measure_temperature', parseInt(temperature));
             await this.setCapabilityValue('measure_uptime', parseInt(uptime) / 3600);
+            await this.setCapabilityValue('measure_uptime_days', splitTime(uptime, this.homey.__));
             await this.setCapabilityValue('measure_disk_usage', parseInt(disk_usage));
             await this.setCapabilityValue('measure_cpu_usage', parseInt(cpu_load));
             await this.setCapabilityValue('measure_ram_usage', parseInt(ram_load));

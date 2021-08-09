@@ -15,5 +15,10 @@
     "reboot": "Rebooting",
     "shutdown": "Shutting down",
     "override_onoff": "Device is always-on"
+  },
+  "helpers": {
+    "days": "d",
+    "hours": "h",
+    "minutes": "m"
   }
 }

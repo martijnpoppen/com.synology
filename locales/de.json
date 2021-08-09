@@ -15,5 +15,10 @@
     "reboot": "Neustarten",
     "shutdown": "Herunterfahren",
     "override_onoff": "DiskStation is immer-auf"
+  },
+  "helpers": {
+    "days": "Tg",
+    "hours": "Std",
+    "minutes": "min"
   }
 }

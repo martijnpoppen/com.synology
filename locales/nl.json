@@ -15,5 +15,10 @@
     "reboot": "Herstarten",
     "shutdown": "Afsluiten",
     "override_onoff": "DiskStation is altijd-aan"
+  },
+  "helpers": {
+    "days": "d",
+    "hours": "u",
+    "minutes": "m"
   }
 }
