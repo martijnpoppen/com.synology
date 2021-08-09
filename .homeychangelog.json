@@ -97,5 +97,11 @@
   },
   "1.6.3": {
     "en": "FIX: new secret key for password encryption"
+  },
+  "1.6.4": {
+    "en": "FIX: invalid_setting_type bug"
+  },
+  "1.6.5": {
+    "en": "FIX: invalid_setting_type bug"
   }
 }
