@@ -106,5 +106,8 @@
   },
   "1.6.6": {
     "en": "ADD days/hours/minutes for time"
+  },
+  "1.6.7": {
+    "en": "FIX: invalid IV length on startup - FIX: German language"
   }
 }
