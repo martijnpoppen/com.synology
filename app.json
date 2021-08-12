@@ -144,7 +144,7 @@
               "label": {
                 "en": "Update interval",
                 "nl": "Update interval",
-                "de": "Update intervall"
+                "de": "Update Intervall"
               },
               "min": 30,
               "max": 3600,
@@ -161,7 +161,7 @@
               "label": {
                 "en": "Enable automatic data",
                 "nl": "Automatische gegevens ophalen",
-                "de": "Automatische Daten abrufen"
+                "de": "Daten automatisch abrufen"
               },
               "value": true
             }
