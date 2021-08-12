@@ -4,36 +4,40 @@ const { sleep, decrypt, encrypt, splitTime } = require('../lib/helpers');
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
-        const settings = this.getSettings();
+        try {
+            const settings = this.getSettings();
 
-		this.homey.app.log('[Device] - init =>', this.getName());
-        this.homey.app.setDevices(this);
+            this.homey.app.log('[Device] - init =>', this.getName());
+            this.homey.app.setDevices(this);
 
-        if(!settings.mac || settings.mac.length < 8) {
-            await this.findMacAddress();
+            if(!settings.mac || settings.mac.length < 8) {
+                await this.findMacAddress();
+            }
+
+            if(!settings.encrypted_password || !settings.passwd.includes('+')) {
+                await this.savePassword({...settings, encrypted_password: true, encrypted_password_fix: true });
+            } 
+
+            await this.checkCapabilities();
+
+            await this.setSynoClient();
+
+            this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
+            this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
+            this.registerCapabilityListener('action_update_data', this.onCapability_UPDATE_DATA.bind(this));
+
+            await this.checkOnOffState();
+            await this.setCapabilityValues();
+
+            if(settings.enable_interval) {
+                await this.checkOnOffStateInterval(settings.update_interval);
+                await this.setCapabilityValuesInterval(settings.update_interval);
+            }
+
+            await this.setAvailable();
+        } catch (error) {
+            this.homey.app.log(`[Device] ${this.getName()} - OnInit Error`, error);
         }
-
-        if(!settings.encrypted_password) {
-            await this.savePassword({...settings, encrypted_password: true, encrypted_password_fix: true });
-        }
-
-        await this.checkCapabilities();
-
-        await this.setSynoClient();
-
-        this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
-        this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
-        this.registerCapabilityListener('action_update_data', this.onCapability_UPDATE_DATA.bind(this));
-
-        await this.checkOnOffState();
-        await this.setCapabilityValues();
-
-        if(settings.enable_interval) {
-            await this.checkOnOffStateInterval(settings.update_interval);
-            await this.setCapabilityValuesInterval(settings.update_interval);
-        }
-
-        await this.setAvailable();
     }
 
     async onSettings({ oldSettings, newSettings, changedKeys }) {
@@ -56,12 +60,17 @@ module.exports = class mainDevice extends Homey.Device {
         }
 
         if(newSettings.passwd !== oldSettings.passwd) {
-            this.savePassword(newSettings);
+            this.savePassword(newSettings, 2000);
         }
     }
 
-    async savePassword(settings) {
+    async savePassword(settings, delay = 0) {
         this.homey.app.log(`[Device] ${this.getName()} - savePassword - encrypted`);
+        
+        if(delay > 0) {
+            await sleep(delay);
+        }
+
         await this.setSettings({...settings, passwd: encrypt(settings.passwd)});
     }
 
@@ -205,7 +214,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, powerState);
 
-            if(powerState && powerState.status === 200) {
+            if(powerState && (powerState.status === 200 || powerState.status === 498)) {
                 await this.setCapabilityValue('onoff', true);
                 await this.unsetWarning();
             } else {
