@@ -109,5 +109,8 @@
   },
   "1.6.7": {
     "en": "FIX: invalid IV length on startup - FIX: German language"
+  },
+  "1.6.8": {
+    "en": "FIX: Homey shows DS as off while it isnt. "
   }
 }
