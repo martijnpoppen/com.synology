@@ -214,7 +214,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, powerState);
 
-            if(powerState && (powerState.status === 200 || powerState.status === 498)) {
+            if(powerState && powerState.status === 200) {
                 await this.setCapabilityValue('onoff', true);
                 await this.unsetWarning();
             } else {
@@ -222,9 +222,16 @@ module.exports = class mainDevice extends Homey.Device {
             }
 
             await this.checkRebootState();
-        } catch (error) {
-            this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, error);
-            await this.setCapabilityValue('onoff', false);
+        } catch (e) {
+            this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState - error`, e);
+
+            if(e && (e.error && e.error === 498)) {
+                await this.setCapabilityValue('onoff', true);
+                await this.unsetWarning();
+            } else {
+                await this.setCapabilityValue('onoff', false);
+            }
+
             await this.checkRebootState();
         }
     }
@@ -301,7 +308,7 @@ module.exports = class mainDevice extends Homey.Device {
             await this.setCapabilityValue('measure_cpu_usage', parseInt(cpu_load));
             await this.setCapabilityValue('measure_ram_usage', parseInt(ram_load));
         } catch (error) {
-            this.homey.app.log(error);
+            this.homey.app.log(`[Device] ${this.getName()} - setCapabilityValues - error`, error);
         }
     }
 
