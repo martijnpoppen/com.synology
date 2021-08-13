@@ -112,5 +112,11 @@
   },
   "1.6.8": {
     "en": "FIX: Homey shows DS as off while it isnt. "
+  },
+  "1.6.9": {
+    "en": "FIX: Homey shows DS as off while it isnt. v2"
+  },
+  "1.6.10": {
+    "en": "FIX: Homey shows DS as off "
   }
 }
