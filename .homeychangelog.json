@@ -118,5 +118,8 @@
   },
   "1.6.10": {
     "en": "FIX: Homey shows DS as off "
+  },
+  "1.6.11": {
+    "en": "ADD: papertrail logging"
   }
 }
