@@ -1,6 +1,7 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
 const { sleep, decrypt, encrypt, splitTime } = require('../lib/helpers');
+const { log } = require("../logger");
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -9,6 +10,8 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.homey.app.log('[Device] - init =>', this.getName());
             this.homey.app.setDevices(this);
+
+            this.homey.app.setDebugLogging(settings.debug);
 
             if(!settings.mac || settings.mac.length < 8) {
                 await this.findMacAddress();
@@ -77,11 +80,12 @@ module.exports = class mainDevice extends Homey.Device {
     async setSynoClient(overrideSettings = null) {
         const settings = overrideSettings ? overrideSettings : this.getSettings();
         this.config = {...settings, passwd: decrypt(settings.passwd)};
+        
+        await this.homey.app.setDebugLogging(settings.debug);
 
         this.homey.app.log(`[Device] - ${this.getName()} => setSynoClient Got config`, {...this.config, user: 'LOG', passwd: 'LOG'});
 
         this._synoClient = await new Synology(this.config);
-
     }
 
     async checkCapabilities() {
@@ -249,8 +253,8 @@ module.exports = class mainDevice extends Homey.Device {
             await this.clearIntervals();
 
             if(settings.enable_interval) {
-                await this.checkOnOffStateInterval(newSettings.update_interval);
-                await this.setCapabilityValuesInterval(newSettings.update_interval);
+                await this.checkOnOffStateInterval(settings.update_interval);
+                await this.setCapabilityValuesInterval(settings.update_interval);
             }
 
         } else if(!isOn && this.getStoreValue('rebooting')) {

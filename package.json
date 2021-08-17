@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "got": "^11.8.2",
-    "wake_on_lan": "0.0.4"
+    "wake_on_lan": "0.0.4",
+    "winston": "^3.3.3"
   }
 }
