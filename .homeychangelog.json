@@ -121,5 +121,8 @@
   },
   "1.6.11": {
     "en": "ADD: papertrail logging"
+  },
+  "1.7.0": {
+    "en": "NEW: add file upload via SFTP (port 22)"
   }
 }

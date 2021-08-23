@@ -1,7 +1,7 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
-const { sleep, decrypt, encrypt, splitTime } = require('../lib/helpers');
-const { log } = require("../logger");
+const FTP = require('../lib/synology/ftp');
+const { sleep, decrypt, encrypt, splitTime, removeFile, getFileName, getFilePath } = require('../lib/helpers');
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -86,6 +86,7 @@ module.exports = class mainDevice extends Homey.Device {
         this.homey.app.log(`[Device] - ${this.getName()} => setSynoClient Got config`, {...this.config, user: 'LOG', passwd: 'LOG'});
 
         this._synoClient = await new Synology(this.config);
+        this._ftp = await new FTP({...this.config, port: this.config.sftp_port, path_prefix: '/home/homey-synology/'});
     }
 
     async checkCapabilities() {
@@ -202,8 +203,41 @@ module.exports = class mainDevice extends Homey.Device {
 
            this.setCapabilityValue('action_update_data', false);
 
-           this.checkOnOffState();
-           this.setCapabilityValues();
+            return Promise.resolve(true);
+        } catch (e) {
+            this.homey.app.error(e);
+            return Promise.reject(e);
+        }
+    }
+
+    async onCapability_UPLOAD_FILE(value) {
+        try {
+           let filePath = null;
+           let fileName = null;
+
+           this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE`, value);
+
+            if(!!value.localUrl) {
+                fileName = `${value.id}.jpg`
+                filePath = await getFilePath(value.localUrl, fileName);
+
+                this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - uploading Image`, value.localUrl, value.id);
+                
+            } else if(typeof value === 'string') {
+                fileName = await getFileName(value);
+                filePath = await getFilePath(value, fileName);
+            
+                this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - uploading File`, value, fileName);
+            }
+           
+            if(!fileName.includes('.')) {
+                throw new Error('not a valid file');
+            }
+
+            await this._ftp.upload(filePath, fileName);
+
+            await sleep(200);
+            await removeFile(filePath);
 
             return Promise.resolve(true);
         } catch (e) {

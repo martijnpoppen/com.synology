@@ -14,7 +14,8 @@
     "wol": "Wake-On-Lan kann bis zu 10 Minuten dauern. Der Ein/Aus-Status zeigt “EIN” an, wenn die DiskStation erfolgreich gebootet wurde.",
     "reboot": "Neustarten",
     "shutdown": "Herunterfahren",
-    "override_onoff": "DiskStation ist immer-auf"
+    "override_onoff": "DiskStation ist immer-auf",
+    "file_invalid": "Falsches Dateiformat"
   },
   "helpers": {
     "days": "Tg",

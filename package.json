@@ -7,7 +7,10 @@
     "url": "https://github.com/martijnpoppen/com.synology"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "fs": "^0.0.1-security",
     "got": "^11.8.2",
+    "ssh2-sftp-client": "^7.0.3",
     "wake_on_lan": "0.0.4",
     "winston": "^3.3.3"
   }

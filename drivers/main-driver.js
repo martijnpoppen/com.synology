@@ -30,13 +30,13 @@ module.exports = class mainDriver extends Homey.Driver {
                     version: 6,
                     timeout: 3000
                 };
-                this.homey.app.log(`[Driver] - got config`, this.config);
+                this.homey.app.log(`[Driver] ${this.id} - got config`, this.config);
     
                 this._synoClient = await new Synology(this.config);
 
                 if(this.config.otp_code) {
                     this.synoLogin = await this._synoClient._login();
-                    this.homey.app.log(`[Driver] - synoLogin`, this.synoLogin);
+                    this.homey.app.log(`[Driver] ${this.id} - synoLogin`, this.synoLogin);
                     if(this.synoLogin && this.synoLogin.did) {
                         this.config.device_id = this.synoLogin.did;
                         this.config.otp_code = null;
@@ -46,7 +46,7 @@ module.exports = class mainDriver extends Homey.Driver {
                 }
                 
                 this.synoData = await this._synoClient.getInfo();
-                this.homey.app.log(`[Driver] - got config`, this.config);
+                this.homey.app.log(`[Driver] ${this.id} - got config`, this.config);
             } catch (error) {
                 this.homey.app.log(`[Driver] - error`, error);
                 throw new Error(this.homey.__('pair.error'));
@@ -58,7 +58,7 @@ module.exports = class mainDriver extends Homey.Driver {
             let results = [];
             let pairedDriverDevices = [];
 
-            this.homey.app.log(`[Driver] - this.synoData`, this.synoData);
+            this.homey.app.log(`[Driver] ${this.id} - this.synoData`, this.synoData);
 
             if(this.synoData && this.synoData.hasOwnProperty('error')) {
                 throw new Error(this.homey.__('pair.error'));

@@ -14,7 +14,8 @@
     "wol": "Wake-On-Lan kan tot 10 minuten duren. De AanUit-status zal 'AAN' tonen wanneer DiskStation succesvol is opgestart.",
     "reboot": "Herstarten",
     "shutdown": "Afsluiten",
-    "override_onoff": "DiskStation is altijd-aan"
+    "override_onoff": "DiskStation is altijd-aan",
+    "file_invalid": "Verkeerd bestandsformaat"
   },
   "helpers": {
     "days": "d",

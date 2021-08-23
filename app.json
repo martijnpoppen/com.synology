@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.6.11",
+  "version": "1.7.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -79,6 +79,7 @@
         "onoff",
         "action_reboot",
         "action_update_data",
+        "action_upload_file",
         "alarm_heat",
         "measure_temperature",
         "measure_uptime",
@@ -206,6 +207,16 @@
               "value": 5000
             },
             {
+                "id": "sftp_port",
+                "type": "number",
+                "label": {
+                  "en": "SFTP Port",
+                  "nl": "SFTP Poort",
+                  "de": "SFTP Port"
+                },
+                "value": 22
+              },
+            {
               "id": "secure",
               "type": "checkbox",
               "label": {
@@ -289,6 +300,30 @@
             "type": "device",
             "name": "device",
             "filter": "capabilities=action_update_data"
+          }
+        ]
+      },
+      {
+        "id": "action_upload_file_flow",
+        "title": {
+          "en": "Upload File",
+          "nl": "Bestand uploaden",
+          "de": "Datei hochladen"
+        },
+        "titleFormatted": {
+          "en": "[[device]] [[droptoken]] Upload File",
+          "nl": "[[device]] [[droptoken]] Bestand uploaden",
+          "de": "[[device]] [[droptoken]] Datei hochladen"
+        },
+        "droptoken": [
+          "image",
+          "string"
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "capabilities=action_upload_file"
           }
         ]
       }
@@ -529,6 +564,17 @@
       "getable": false,
       "setable": true,
       "uiComponent": "button"
+    },
+    "action_upload_file": {
+      "type": "string",
+      "title": {
+        "en": "Upload File",
+        "nl": "Bestand uploaden",
+        "de": "Datei hochladen"
+      },
+      "getable": false,
+      "setable": true,
+      "uiComponent": null
     }
   }
 }
