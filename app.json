@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.7.0",
+  "version": "1.7.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -13,6 +13,19 @@
     "en": "The next step in data storage starts here",
     "nl": "De volgende stap in gegevensbeheer begint hier",
     "de": "Der nächste Schritt der Datenspeicherung beginnt hier"
+  },
+  "tags": {
+    "en": [
+      "NAS",
+      "Storage",
+      "FTP",
+      "Webdav",
+      "Surveillance",
+      "Photo",
+      "Video",
+      "WOL",
+      "Wake on Lan"
+    ]
   },
   "category": [
     "security"
@@ -207,15 +220,15 @@
               "value": 5000
             },
             {
-                "id": "sftp_port",
-                "type": "number",
-                "label": {
-                  "en": "SFTP Port",
-                  "nl": "SFTP Poort",
-                  "de": "SFTP Port"
-                },
-                "value": 22
+              "id": "sftp_port",
+              "type": "number",
+              "label": {
+                "en": "SFTP Port",
+                "nl": "SFTP Poort",
+                "de": "SFTP Port"
               },
+              "value": 22
+            },
             {
               "id": "secure",
               "type": "checkbox",
