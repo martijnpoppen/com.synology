@@ -1,7 +1,7 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
 const FTP = require('../lib/synology/ftp');
-const { sleep, decrypt, encrypt, splitTime, removeFile, getFileName, getFilePath } = require('../lib/helpers');
+const { sleep, decrypt, encrypt, hoursMinutes, splitTime, removeFile, getFileName, getFilePath } = require('../lib/helpers');
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -203,6 +203,9 @@ module.exports = class mainDevice extends Homey.Device {
 
            this.setCapabilityValue('action_update_data', false);
 
+           this.checkOnOffState();
+           this.setCapabilityValues();
+
             return Promise.resolve(true);
         } catch (e) {
             this.homey.app.error(e);
@@ -231,7 +234,7 @@ module.exports = class mainDevice extends Homey.Device {
             }
            
             if(!fileName.includes('.')) {
-                throw new Error('not a valid file');
+                throw new Error(this.homey.__("diskstation.file_invalid"));
             }
 
             await this._ftp.upload(filePath, fileName);
@@ -340,7 +343,7 @@ module.exports = class mainDevice extends Homey.Device {
             
             await this.setCapabilityValue('alarm_heat', !!temperature_warn);
             await this.setCapabilityValue('measure_temperature', parseInt(temperature));
-            await this.setCapabilityValue('measure_uptime', parseInt(uptime) / 3600);
+            await this.setCapabilityValue('measure_uptime', parseFloat(hoursMinutes(uptime)));
             await this.setCapabilityValue('measure_uptime_days', splitTime(uptime, this.homey.__));
             await this.setCapabilityValue('measure_disk_usage', parseInt(disk_usage));
             await this.setCapabilityValue('measure_cpu_usage', parseInt(cpu_load));
