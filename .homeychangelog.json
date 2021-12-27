@@ -133,5 +133,8 @@
   },
   "1.7.3": {
     "en": "Add tags to improve Homey Store Search"
+  },
+  "1.8.0": {
+    "en": "NEW: add flowcard to upload a file with hashed filename"
   }
 }
