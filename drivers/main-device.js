@@ -1,7 +1,7 @@
 const Homey = require('homey');
 const Synology = require('../lib/synology');
 const FTP = require('../lib/synology/ftp');
-const { sleep, decrypt, encrypt, hoursMinutes, splitTime, removeFile, getFileName, getFilePath } = require('../lib/helpers');
+const { sleep, hash, decrypt, encrypt, hoursMinutes, splitTime, removeFile, getFileName, getFilePath } = require('../lib/helpers');
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -213,7 +213,7 @@ module.exports = class mainDevice extends Homey.Device {
         }
     }
 
-    async onCapability_UPLOAD_FILE(value) {
+    async onCapability_UPLOAD_FILE(value, hashed = false) {
         try {
            let filePath = null;
            let fileName = null;
@@ -221,13 +221,13 @@ module.exports = class mainDevice extends Homey.Device {
            this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE`, value);
 
             if(!!value.localUrl) {
-                fileName = `${value.id}.jpg`
+                fileName = hashed ? `${hash()}.jpg` : `${value.id}.jpg`;
                 filePath = await getFilePath(value.localUrl, fileName);
 
                 this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - uploading Image`, value.localUrl, value.id);
                 
             } else if(typeof value === 'string') {
-                fileName = await getFileName(value);
+                fileName = await getFileName(value, hashed);
                 filePath = await getFilePath(value, fileName);
             
                 this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - uploading File`, value, fileName);
@@ -237,6 +237,7 @@ module.exports = class mainDevice extends Homey.Device {
                 throw new Error(this.homey.__("diskstation.file_invalid"));
             }
 
+            this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - FTP`, filePath, fileName);
             await this._ftp.upload(filePath, fileName);
 
             await sleep(200);

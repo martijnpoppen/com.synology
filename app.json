@@ -339,6 +339,30 @@
             "filter": "capabilities=action_upload_file"
           }
         ]
+      },
+      {
+        "id": "action_upload_file_flow_hashed",
+        "title": {
+          "en": "Upload File",
+          "nl": "Bestand uploaden",
+          "de": "Datei hochladen"
+        },
+        "titleFormatted": {
+          "en": "[[device]] [[droptoken]] Upload File (hashed filename)",
+          "nl": "[[device]] [[droptoken]] Bestand uploaden (hashed bestandsnaam)",
+          "de": "[[device]] [[droptoken]] Datei hochladen (hashed Dateiname)"
+        },
+        "droptoken": [
+          "image",
+          "string"
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "capabilities=action_upload_file"
+          }
+        ]
       }
     ]
   },
