@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.7.3",
+  "version": "1.8.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -343,9 +343,9 @@
       {
         "id": "action_upload_file_flow_hashed",
         "title": {
-          "en": "Upload File",
-          "nl": "Bestand uploaden",
-          "de": "Datei hochladen"
+          "en": "Upload File (hashed filename)",
+          "nl": "Bestand uploaden (hashed bestandsnaam)",
+          "de": "Datei hochladen (hashed Dateiname)"
         },
         "titleFormatted": {
           "en": "[[device]] [[droptoken]] Upload File (hashed filename)",

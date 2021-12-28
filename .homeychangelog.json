@@ -136,5 +136,8 @@
   },
   "1.8.0": {
     "en": "NEW: add flowcard to upload a file with hashed filename"
+  },
+  "1.8.1": {
+    "en": "FIX: flowcard title"
   }
 }
