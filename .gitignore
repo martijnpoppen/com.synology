@@ -94,3 +94,7 @@ typings/
 .dynamodb/
 
 build/
+
+
+# Added by Homey CLI
+/.homeybuild/
