@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.8.1",
+  "version": "1.8.4",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -284,15 +284,15 @@
           "de": "Neustarten"
         },
         "titleFormatted": {
-          "en": "[[device]] Reboot",
-          "nl": "[[device]] Herstarten",
-          "de": "[[device]] Neustarten"
+          "en": "Reboot",
+          "nl": "Herstarten",
+          "de": "Neustarten"
         },
         "args": [
           {
             "type": "device",
             "name": "device",
-            "filter": "capabilities=action_reboot"
+            "filter": "driver_id=DiskStation&capabilities=action_reboot"
           }
         ]
       },
@@ -304,15 +304,15 @@
           "de": "Daten aktualisieren"
         },
         "titleFormatted": {
-          "en": "[[device]] Update data",
-          "nl": "[[device]] Data updaten",
-          "de": "[[device]] Daten aktualisieren"
+          "en": "Update data",
+          "nl": "Data updaten",
+          "de": "Daten aktualisieren"
         },
         "args": [
           {
             "type": "device",
             "name": "device",
-            "filter": "capabilities=action_update_data"
+            "filter": "driver_id=DiskStation&capabilities=action_update_data"
           }
         ]
       },
@@ -324,9 +324,9 @@
           "de": "Datei hochladen"
         },
         "titleFormatted": {
-          "en": "[[device]] [[droptoken]] Upload File",
-          "nl": "[[device]] [[droptoken]] Bestand uploaden",
-          "de": "[[device]] [[droptoken]] Datei hochladen"
+          "en": "[[droptoken]] Upload File",
+          "nl": "[[droptoken]] Bestand uploaden",
+          "de": "[[droptoken]] Datei hochladen"
         },
         "droptoken": [
           "image",
@@ -336,7 +336,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "capabilities=action_upload_file"
+            "filter": "driver_id=DiskStation&capabilities=action_upload_file"
           }
         ]
       },
@@ -348,9 +348,9 @@
           "de": "Datei hochladen (hashed Dateiname)"
         },
         "titleFormatted": {
-          "en": "[[device]] [[droptoken]] Upload File (hashed filename)",
-          "nl": "[[device]] [[droptoken]] Bestand uploaden (hashed bestandsnaam)",
-          "de": "[[device]] [[droptoken]] Datei hochladen (hashed Dateiname)"
+          "en": "[[droptoken]] Upload File (hashed filename)",
+          "nl": "[[droptoken]] Bestand uploaden (hashed bestandsnaam)",
+          "de": "[[droptoken]] Datei hochladen (hashed Dateiname)"
         },
         "droptoken": [
           "image",
@@ -360,7 +360,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "capabilities=action_upload_file"
+            "filter": "driver_id=DiskStation&capabilities=action_upload_file"
           }
         ]
       }
@@ -368,98 +368,98 @@
   },
   "capabilities": {
     "onoff": {
-        "type": "boolean",
-        "title": {
-          "en": "Turned on",
-          "nl": "Aangezet",
-          "de": "Eingeschaltet"
+      "type": "boolean",
+      "title": {
+        "en": "Turned on",
+        "nl": "Aangezet",
+        "de": "Eingeschaltet"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Turned on",
+        "nl": "Aangezet",
+        "de": "Eingeschaltet"
+      },
+      "insightsTitleFalse": {
+        "en": "Turned off",
+        "nl": "Uitgezet",
+        "de": "Ausgeschaltet"
+      },
+      "options": {
+        "setOnDim": {
+          "type": "boolean",
+          "default": true
         },
-        "getable": true,
-        "setable": true,
-        "insights": true,
-        "insightsTitleTrue": {
-          "en": "Turned on",
-          "nl": "Aangezet",
-          "de": "Eingeschaltet"
-        },
-        "insightsTitleFalse": {
-          "en": "Turned off",
-          "nl": "Uitgezet",
-          "de": "Ausgeschaltet"
-        },
-        "options": {
-          "setOnDim": {
-            "type": "boolean",
-            "default": true
-          },
-          "greyout": {
-            "type": "boolean",
-            "default": true,
-            "desc": {
-              "en": "When this capability is false, give a visual hint to greyout the device.",
-              "de": "wenn diese Fähigkeit 'false' ist, gibt es einen visuellenen Hinweis, um das Gerät auszugrauen."
-            }
+        "greyout": {
+          "type": "boolean",
+          "default": true,
+          "desc": {
+            "en": "When this capability is false, give a visual hint to greyout the device.",
+            "de": "wenn diese Fähigkeit 'false' ist, gibt es einen visuellenen Hinweis, um das Gerät auszugrauen."
           }
-        },
-        "uiComponent": "toggle",
-        "uiQuickAction": false,
-        "$flow": {
-          "triggers": [
-            {
-              "id": "onoff_true",
-              "title": {
-                "en": "Turned on",
-                "nl": "Aangezet ",
-                "de": "Angeschaltet"
-              }
-            },
-            {
-              "id": "onoff_false",
-              "title": {
-                "en": "Turned off",
-                "nl": "Uitgezet",
-                "de": "Ausgeschaltet"
-              }
-            }
-          ],
-          "conditions": [
-            {
-              "id": "on",
-              "title": {
-                "en": "Is turned !{{on|off}}",
-                "nl": "Is !{{aan|uit}}",
-                "de": "Ist !{{an|aus}}"
-              }
-            }
-          ],
-          "actions": [
-            {
-              "id": "on",
-              "title": {
-                "en": "Turn on",
-                "nl": "Zet aan",
-                "de": "Einschalten"
-              }
-            },
-            {
-              "id": "off",
-              "title": {
-                "en": "Turn off",
-                "nl": "Zet uit",
-                "de": "Ausschalten"
-              }
-            },
-            {
-              "id": "toggle",
-              "title": {
-                "en": "Toggle on or off",
-                "nl": "Schakel aan of uit",
-                "de": "Ein- oder ausschalten"
-              }
-            }
-          ]
         }
       },
+      "uiComponent": "toggle",
+      "uiQuickAction": false,
+      "$flow": {
+        "triggers": [
+          {
+            "id": "onoff_true",
+            "title": {
+              "en": "Turned on",
+              "nl": "Aangezet ",
+              "de": "Angeschaltet"
+            }
+          },
+          {
+            "id": "onoff_false",
+            "title": {
+              "en": "Turned off",
+              "nl": "Uitgezet",
+              "de": "Ausgeschaltet"
+            }
+          }
+        ],
+        "conditions": [
+          {
+            "id": "on",
+            "title": {
+              "en": "Is turned !{{on|off}}",
+              "nl": "Is !{{aan|uit}}",
+              "de": "Ist !{{an|aus}}"
+            }
+          }
+        ],
+        "actions": [
+          {
+            "id": "on",
+            "title": {
+              "en": "Turn on",
+              "nl": "Zet aan",
+              "de": "Einschalten"
+            }
+          },
+          {
+            "id": "off",
+            "title": {
+              "en": "Turn off",
+              "nl": "Zet uit",
+              "de": "Ausschalten"
+            }
+          },
+          {
+            "id": "toggle",
+            "title": {
+              "en": "Toggle on or off",
+              "nl": "Schakel aan of uit",
+              "de": "Ein- oder ausschalten"
+            }
+          }
+        ]
+      }
+    },
     "measure_uptime": {
       "type": "number",
       "title": {

@@ -139,5 +139,14 @@
   },
   "1.8.1": {
     "en": "FIX: flowcard title"
+  },
+  "1.8.2": {
+    "en": "FIX: remove uiQuickAction for onoff"
+  },
+  "1.8.3": {
+    "en": "FIX: connect flowcards to driverID"
+  },
+  "1.8.4": {
+    "en": "FIX: connect flowcards to driverID"
   }
 }
