@@ -15,6 +15,7 @@
     "reboot": "Herstarten",
     "shutdown": "Afsluiten",
     "override_onoff": "DiskStation is altijd-aan",
+    "quickaction_onoff": "DiskStation kan niet aan/uit gezet via deze knop",
     "file_invalid": "Verkeerd bestandsformaat"
   },
   "helpers": {

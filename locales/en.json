@@ -15,6 +15,7 @@
     "reboot": "Rebooting",
     "shutdown": "Shutting down",
     "override_onoff": "Device is always-on",
+    "quickaction_onoff": "Can't turn DiskStation on/off with this button",
     "file_invalid": "Wrong file format"
   },
   "helpers": {

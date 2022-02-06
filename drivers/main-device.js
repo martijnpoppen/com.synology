@@ -26,6 +26,7 @@ module.exports = class mainDevice extends Homey.Device {
             await this.setSynoClient();
 
             this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
+            this.registerCapabilityListener('onoff_override', this.onCapability_ON_OFF_OVERRIDE.bind(this));
             this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
             this.registerCapabilityListener('action_update_data', this.onCapability_UPDATE_DATA.bind(this));
 
@@ -176,6 +177,15 @@ module.exports = class mainDevice extends Homey.Device {
         }
     }
 
+    async onCapability_ON_OFF_OVERRIDE() {
+        try {
+            throw new Error(this.homey.__("diskstation.quickaction_onoff"));
+        } catch (e) {
+            this.homey.app.error(e);
+            return Promise.reject(e);
+        }
+    }
+
     async onCapability_REBOOT(value) {
         try {
            this.homey.app.log(`[Device] ${this.getName()} - onCapability_REBOOT`, value);
@@ -258,9 +268,11 @@ module.exports = class mainDevice extends Homey.Device {
 
             if(powerState && powerState.status === 200) {
                 await this.setCapabilityValue('onoff', true);
+                await this.setCapabilityValue('onoff_override', true);
                 await this.unsetWarning();
             } else {
                 await this.setCapabilityValue('onoff', false);
+                await this.setCapabilityValue('onoff_override', false);
             }
 
             await this.checkRebootState();
@@ -269,9 +281,11 @@ module.exports = class mainDevice extends Homey.Device {
 
             if(e && (e.error && e.error === 498)) {
                 await this.setCapabilityValue('onoff', true);
+                await this.setCapabilityValue('onoff_override', true);
                 await this.unsetWarning();
             } else {
                 await this.setCapabilityValue('onoff', false);
+                await this.setCapabilityValue('onoff_override', false);
             }
 
             await this.checkRebootState();

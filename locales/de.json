@@ -15,6 +15,7 @@
     "reboot": "Neustarten",
     "shutdown": "Herunterfahren",
     "override_onoff": "DiskStation ist immer-an",
+    "quickaction_onoff": "DiskStation kann mit dieser Taste nicht ein-/ausgeschaltet werden",
     "file_invalid": "Falsches Dateiformat"
   },
   "helpers": {
