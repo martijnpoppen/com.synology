@@ -148,5 +148,8 @@
   },
   "1.8.4": {
     "en": "FIX: connect flowcards to driverID"
+  },
+  "1.8.5": {
+    "en": "FIX: set UI tile to on/off when device on/off. Prevent click"
   }
 }

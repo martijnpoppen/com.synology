@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.8.4",
+  "version": "1.8.5",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -90,6 +90,7 @@
       ],
       "capabilities": [
         "onoff",
+        "onoff_override",
         "action_reboot",
         "action_update_data",
         "action_upload_file",
@@ -459,6 +460,18 @@
           }
         ]
       }
+    },
+    "onoff_override": {
+      "type": "boolean",
+      "title": {
+        "en": "Turned on",
+        "nl": "Aangezet",
+        "de": "Eingeschaltet"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": null,
+      "uiQuickAction": true
     },
     "measure_uptime": {
       "type": "number",
