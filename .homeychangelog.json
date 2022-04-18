@@ -151,5 +151,8 @@
   },
   "1.8.5": {
     "en": "FIX: set UI tile to on/off when device on/off. Prevent click"
+  },
+  "1.9.0": {
+    "en": "NEW: prepare for Homey 7.4 (move from got to axios)"
   }
 }
