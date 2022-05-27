@@ -154,5 +154,8 @@
   },
   "1.9.0": {
     "en": "NEW: prepare for Homey 7.4 (move from got to axios)"
+  },
+  "1.9.1": {
+    "en": "FIX: wake on lan issue due to Homey 7.4.1"
   }
 }
