@@ -157,5 +157,8 @@
   },
   "1.9.1": {
     "en": "FIX: wake on lan issue due to Homey 7.4.1"
+  },
+  "1.9.2": {
+    "en": "ADD: device icon"
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -43,6 +43,10 @@
       {
         "name": "Martijn Poppen",
         "email": "synology@martijnpoppen.nl"
+      },
+      {
+        "name": "Bas van der Ploeg (device icons)",
+        "email": "bas@basvanderploeg.nl"
       }
     ],
     "translators": [
