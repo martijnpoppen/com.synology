@@ -160,5 +160,8 @@
   },
   "1.9.2": {
     "en": "ADD: device icon"
+  },
+  "1.9.3": {
+    "en": "FIX: error state if disk_usage is temporarily unkown"
   }
 }

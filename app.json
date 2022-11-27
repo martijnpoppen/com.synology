@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -64,6 +64,9 @@
   "contributing": {
     "donate": {
       "paypal": {
+        "username": "martijnpoppen"
+      },
+      "bunq": {
         "username": "martijnpoppen"
       }
     }
