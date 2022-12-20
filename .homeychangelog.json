@@ -163,5 +163,8 @@
   },
   "1.9.3": {
     "en": "FIX: error state if disk_usage is temporarily unkown"
+  },
+  "1.9.4": {
+    "en": "FIX: error lgos"
   }
 }

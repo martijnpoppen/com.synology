@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
