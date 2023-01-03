@@ -350,7 +350,7 @@ module.exports = class mainDevice extends Homey.Device {
             }
 
             const {temperature, temperature_warn, uptime, ram} = deviceInfo;
-            const { disk_usage } = await this.setDiskUsage(diskUsageInfo);
+            const disk_usage = await this.setDiskUsage(diskUsageInfo);
             const { cpu_load, ram_load } = await this.setLoad(systemUsageInfo);
 
             this.homey.app.log(`[Device] ${this.getName()} - deviceInfo =>`, deviceInfo);
@@ -360,9 +360,9 @@ module.exports = class mainDevice extends Homey.Device {
             await this.setCapabilityValue('measure_temperature', parseInt(temperature));
             await this.setCapabilityValue('measure_uptime', parseFloat(hoursMinutes(uptime)));
             await this.setCapabilityValue('measure_uptime_days', splitTime(uptime, this.homey.__));
-            await this.setCapabilityValue('measure_disk_usage', parseInt(disk_usage));
-            await this.setCapabilityValue('measure_cpu_usage', parseInt(cpu_load));
-            await this.setCapabilityValue('measure_ram_usage', parseInt(ram_load));
+            if(disk_usage !== null) await this.setCapabilityValue('measure_disk_usage', parseInt(disk_usage));
+            if(cpu_load !== null) await this.setCapabilityValue('measure_cpu_usage', parseInt(cpu_load));
+            if(ram_load !== null) await this.setCapabilityValue('measure_ram_usage', parseInt(ram_load));
         } catch (error) {
             this.homey.app.log(`[Device] ${this.getName()} - setCapabilityValues - error`, error);
         }
@@ -386,20 +386,25 @@ module.exports = class mainDevice extends Homey.Device {
             let used = 0;
             let total = 0;
 
-            if (settings.version < 6) {
-                for (var i = data.volumes.length; i--;) {
-                    used += data.volumes[i].used;
-                    total += data.volumes[i].total;
-                }
-            } else if (settings.version >= 6) {
-                for (var i = data.vol_info.length; i--;) {
-                    used += data.vol_info[i].used_size;
-                    total += data.vol_info[i].total_size;
-                }                
-            } 
+            if(data.vol_info) {
+                if (settings.version < 6) {
+                    for (var i = data.volumes.length; i--;) {
+                        used += data.volumes[i].used;
+                        total += data.volumes[i].total;
+                    }
+                } else if (settings.version >= 6) {
+                    for (var i = data.vol_info.length; i--;) {
+                        used += data.vol_info[i].used_size;
+                        total += data.vol_info[i].total_size;
+                    }                
+                } 
+            } else {
+                return null;
+            }
+           
 
 
-            const usage = {disk_usage: Math.round(used / total * 100)};
+            const usage = Math.round(used / total * 100);
             this.homey.app.log(`[Device] ${this.getName()} - setDiskUsage`, used, total, usage);
 
             return usage;
@@ -415,12 +420,18 @@ module.exports = class mainDevice extends Homey.Device {
             let cpu_load = 0;
             let ram_load = 0;
 
-            if (settings.version >= 6) {
-                cpu_load = data.cpu['other_load'] + data.cpu['system_load'] + data.cpu['user_load'];
-                ram_load = data.memory.real_usage;
+            if(data.cpu) {
+                if (settings.version >= 6) {
+                    cpu_load = data.cpu['other_load'] + data.cpu['system_load'] + data.cpu['user_load'];
+                    ram_load = data.memory.real_usage;
+                } else {
+                    cpu_load = Math.round(data.cpu.user * 100);
+                }
             } else {
-                cpu_load = Math.round(data.cpu.user * 100);
+                cpu_load = null;
+                ram_load = null;
             }
+           
     
             const usage = {cpu_load, ram_load};
             this.homey.app.log(`[Device] ${this.getName()} - setLoad`, usage);
