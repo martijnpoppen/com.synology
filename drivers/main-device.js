@@ -191,7 +191,7 @@ module.exports = class mainDevice extends Homey.Device {
            this.homey.app.log(`[Device] ${this.getName()} - onCapability_REBOOT`, value);
 
            this.setStoreValue('rebooting', true);
-           this.setCapabilityValue('action_reboot', false);
+           this.setValue('action_reboot', false);
 
            await this._synoClient.shutdown();
            
@@ -211,7 +211,7 @@ module.exports = class mainDevice extends Homey.Device {
         try {
            this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPDATE_DATA`, value);
 
-           this.setCapabilityValue('action_update_data', false);
+           this.setValue('action_update_data', false);
 
            this.checkOnOffState();
            this.setCapabilityValues();
@@ -267,12 +267,12 @@ module.exports = class mainDevice extends Homey.Device {
             this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, powerState);
 
             if(powerState && powerState.status === 200) {
-                await this.setCapabilityValue('onoff', true);
-                await this.setCapabilityValue('onoff_override', true);
+                await this.setValue('onoff', true);
+                await this.setValue('onoff_override', true);
                 await this.unsetWarning();
             } else {
-                await this.setCapabilityValue('onoff', false);
-                await this.setCapabilityValue('onoff_override', false);
+                await this.setValue('onoff', false);
+                await this.setValue('onoff_override', false);
             }
 
             await this.checkRebootState();
@@ -280,12 +280,12 @@ module.exports = class mainDevice extends Homey.Device {
             this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState - error`, e);
 
             if(e && (e.error && e.error === 498)) {
-                await this.setCapabilityValue('onoff', true);
-                await this.setCapabilityValue('onoff_override', true);
+                await this.setValue('onoff', true);
+                await this.setValue('onoff_override', true);
                 await this.unsetWarning();
             } else {
-                await this.setCapabilityValue('onoff', false);
-                await this.setCapabilityValue('onoff_override', false);
+                await this.setValue('onoff', false);
+                await this.setValue('onoff_override', false);
             }
 
             await this.checkRebootState();
@@ -355,14 +355,15 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.homey.app.log(`[Device] ${this.getName()} - deviceInfo =>`, deviceInfo);
             this.homey.app.log(`[Device] ${this.getName()} - diskUsageInfo =>`, diskUsageInfo);
+            this.homey.app.log(`[Device] ${this.getName()} - systemUsageInfo =>`, systemUsageInfo);
             
-            await this.setCapabilityValue('alarm_heat', !!temperature_warn);
-            await this.setCapabilityValue('measure_temperature', parseInt(temperature));
-            await this.setCapabilityValue('measure_uptime', parseFloat(hoursMinutes(uptime)));
-            await this.setCapabilityValue('measure_uptime_days', splitTime(uptime, this.homey.__));
-            if(disk_usage !== null) await this.setCapabilityValue('measure_disk_usage', parseInt(disk_usage));
-            if(cpu_load !== null) await this.setCapabilityValue('measure_cpu_usage', parseInt(cpu_load));
-            if(ram_load !== null) await this.setCapabilityValue('measure_ram_usage', parseInt(ram_load));
+            await this.setValue('alarm_heat', !!temperature_warn);
+            await this.setValue('measure_temperature', parseInt(temperature));
+            await this.setValue('measure_uptime', parseFloat(hoursMinutes(uptime)));
+            await this.setValue('measure_uptime_days', splitTime(uptime, this.homey.__));
+            if(disk_usage !== null) await this.setValue('measure_disk_usage', parseInt(disk_usage));
+            if(cpu_load !== null) await this.setValue('measure_cpu_usage', parseInt(cpu_load));
+            if(ram_load !== null) await this.setValue('measure_ram_usage', parseInt(ram_load));
         } catch (error) {
             this.homey.app.log(`[Device] ${this.getName()} - setCapabilityValues - error`, error);
         }
@@ -442,6 +443,23 @@ module.exports = class mainDevice extends Homey.Device {
             this.homey.app.log(error);
         }
     }
+
+    async setValue(key, value, firstRun = false, delay = 10) {
+        this.homey.app.log(`[Device] ${this.getName()} - setValue => ${key} => `, value);
+
+        if (this.hasCapability(key)) {
+            const oldVal = await this.getCapabilityValue(key);
+
+            this.homey.app.log(`[Device] ${this.getName()} - setValue - oldValue => ${key} => `, oldVal, value);
+
+            if (delay) {
+                await sleep(delay);
+            }
+
+            await this.setCapabilityValue(key, value);
+        }
+    }
+
 
     async clearIntervals() {
         this.homey.app.log(`[Device] ${this.getName()} - clearIntervals`);
