@@ -178,5 +178,8 @@
   },
   "1.9.8": {
     "en": "FIX: ftp upload"
+  },
+  "1.10.0": {
+    "en": "NEW: FTP for HP23"
   }
 }
