@@ -169,5 +169,8 @@
   },
   "1.9.5": {
     "en": "FIX: disk usage"
+  },
+  "1.9.6": {
+    "en": "FIX: FTP upload HP23"
   }
 }
