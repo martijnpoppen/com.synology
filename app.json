@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.10.2",
+  "version": "1.10.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -104,7 +104,7 @@
         "alarm_heat",
         "measure_temperature",
         "measure_uptime",
-        "measure_uptime_days",
+        "uptime_days",
         "measure_cpu_usage",
         "measure_ram_usage",
         "measure_disk_usage"
@@ -615,7 +615,7 @@
       "uiComponent": "sensor",
       "icon": "assets/icons/stopwatch.svg"
     },
-    "measure_uptime_days": {
+    "uptime_days": {
       "type": "string",
       "title": {
         "en": "Up-Time",

@@ -187,5 +187,8 @@
   },
   "1.10.2": {
     "en": "FIX: some cards had wrong type, causing issue in Homey-Core"
+  },
+  "1.10.3": {
+    "en": "FIX: some cards had wrong type, causing issue in Homey-Core"
   }
 }
