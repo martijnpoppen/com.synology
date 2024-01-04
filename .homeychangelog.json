@@ -181,5 +181,11 @@
   },
   "1.10.0": {
     "en": "NEW: FTP for HP23"
+  },
+  "1.10.1": {
+    "en": "FIX: some cards had wrong type, causing issue in Homey-Core"
+  },
+  "1.10.2": {
+    "en": "FIX: some cards had wrong type, causing issue in Homey-Core"
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "com.synology",
-  "version": "1.10.0",
+  "version": "1.10.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -283,6 +283,116 @@
     }
   ],
   "flow": {
+    "triggers": [
+      {
+        "id": "measure_uptime_changed",
+        "title": {
+          "en": "The uptime has changed",
+          "nl": "De online tijd is veranderd",
+          "de": "Die Laufzeit hat sich geändert"
+        },
+        "tokens": [
+          {
+            "name": "measure_uptime",
+            "title": {
+              "en": "Up-Time",
+              "nl": "Online tijd",
+              "de": "Laufzeit"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation&capabilities=measure_uptime"
+          }
+        ]
+      },
+      {
+        "id": "measure_disk_usage_changed",
+        "title": {
+          "en": "Disk Usage has changed",
+          "nl": "Schijf gebruik is veranderd",
+          "de": "Festplattenbelegung hat sich verändert"
+        },
+        "tokens": [
+          {
+            "name": "measure_disk_usage",
+            "title": {
+              "en": "Disk Usage",
+              "nl": "Schijf gebruik",
+              "de": "Festplattenbelegung"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation&capabilities=measure_disk_usage"
+          }
+        ]
+      },
+      {
+        "id": "measure_CPU_usage_changed",
+        "title": {
+          "en": "CPU Usage has changed",
+          "nl": "CPU gebruik is veranderd",
+          "de": "CPU-Auslastung hat sich verändert"
+        },
+        "tokens": [
+          {
+            "name": "measure_cpu_usage",
+            "title": {
+              "en": "CPU Usage",
+              "nl": "CPU gebruik",
+              "de": "CPU-Auslastung"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation&capabilities=measure_cpu_usage"
+          }
+        ]
+      },
+      {
+        "id": "measure_ram_usage_changed",
+        "title": {
+          "en": "RAM Usage has changed",
+          "nl": "RAM gebruik is veranderd",
+          "de": "RAM-Auslastung hat sich verändert"
+        },
+        "tokens": [
+          {
+            "name": "measure_ram_usage",
+            "title": {
+              "en": "RAM Usage",
+              "nl": "RAM gebruik",
+              "de": "RAM-Auslastung"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation&capabilities=measure_ram_usage"
+          }
+        ]
+      }
+    ],
     "actions": [
       {
         "id": "action_reboot_flow",
@@ -503,31 +613,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "assets/icons/stopwatch.svg",
-      "$flow": {
-        "triggers": [
-          {
-            "id": "measure_uptime_changed",
-            "title": {
-              "en": "The uptime has changed",
-              "nl": "De online tijd is veranderd",
-              "de": "Die Laufzeit hat sich geändert"
-            },
-            "tokens": [
-              {
-                "name": "measure_uptime",
-                "title": {
-                  "en": "Up-Time",
-                  "nl": "Online tijd",
-                  "de": "Laufzeit"
-                },
-                "type": "number",
-                "example": 99
-              }
-            ]
-          }
-        ]
-      }
+      "icon": "assets/icons/stopwatch.svg"
     },
     "measure_uptime_days": {
       "type": "string",
@@ -569,31 +655,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "assets/icons/disc-fill.svg",
-      "$flow": {
-        "triggers": [
-          {
-            "id": "measure_disk_usage_changed",
-            "title": {
-              "en": "Disk Usage has changed",
-              "nl": "Schijf gebruik is veranderd",
-              "de": "Festplattenbelegung hat sich verändert"
-            },
-            "tokens": [
-              {
-                "name": "measure_disk_usage",
-                "title": {
-                  "en": "Disk Usage",
-                  "nl": "Schijf gebruik",
-                  "de": "Festplattenbelegung"
-                },
-                "type": "number",
-                "example": 99
-              }
-            ]
-          }
-        ]
-      }
+      "icon": "assets/icons/disc-fill.svg"
     },
     "measure_cpu_usage": {
       "type": "number",
@@ -618,31 +680,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "assets/icons/cpu-fill.svg",
-      "$flow": {
-        "triggers": [
-          {
-            "id": "measure_CPU_usage_changed",
-            "title": {
-              "en": "CPU Usage has changed",
-              "nl": "CPU gebruik is veranderd",
-              "de": "CPU-Auslastung hat sich verändert"
-            },
-            "tokens": [
-              {
-                "name": "measure_cpu_usage",
-                "title": {
-                  "en": "CPU Usage",
-                  "nl": "CPU gebruik",
-                  "de": "CPU-Auslastung"
-                },
-                "type": "number",
-                "example": 99
-              }
-            ]
-          }
-        ]
-      }
+      "icon": "assets/icons/cpu-fill.svg"
     },
     "measure_ram_usage": {
       "type": "number",
@@ -667,31 +705,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "assets/icons/lightning-charge.svg",
-      "$flow": {
-        "triggers": [
-          {
-            "id": "measure_ram_usage_changed",
-            "title": {
-              "en": "RAM Usage has changed",
-              "nl": "RAM gebruik is veranderd",
-              "de": "RAM-Auslastung hat sich verändert"
-            },
-            "tokens": [
-              {
-                "name": "measure_ram_usage",
-                "title": {
-                  "en": "RAM Usage",
-                  "nl": "RAM gebruik",
-                  "de": "RAM-Auslastung"
-                },
-                "type": "number",
-                "example": 99
-              }
-            ]
-          }
-        ]
-      }
+      "icon": "assets/icons/lightning-charge.svg"
     },
     "action_reboot": {
       "type": "boolean",
