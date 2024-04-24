@@ -90,38 +90,6 @@ module.exports = class mainDevice extends Homey.Device {
         this._ftp = await new FTP({...this.config, port: this.config.sftp_port, path_prefix: '/home/homey-synology/'});
     }
 
-    async checkCapabilities() {
-        const driverManifest = this.driver.manifest;
-        const driverCapabilities = driverManifest.capabilities;
-        
-        const deviceCapabilities = this.getCapabilities();
-
-        this.homey.app.log(`[Device] ${this.getName()} - Found capabilities =>`, deviceCapabilities);
-        this.homey.app.log(`[Device] ${this.getName()} - Driver capabilities =>`, driverCapabilities);
-        
-        if(deviceCapabilities.length !== driverCapabilities.length) {      
-            await this.updateCapabilities(driverCapabilities, deviceCapabilities);
-        }
-
-        return deviceCapabilities;
-    }
-
-    async updateCapabilities(driverCapabilities, deviceCapabilities) {
-        this.homey.app.log(`[Device] ${this.getName()} - Add new capabilities =>`, driverCapabilities);
-        try {
-            deviceCapabilities.forEach(c => {
-                this.removeCapability(c);
-            });
-            await sleep(2000);
-            driverCapabilities.forEach(c => {
-                this.addCapability(c);
-            });
-            await sleep(2000);
-        } catch (error) {
-            this.homey.app.log(error)
-        }
-    }
-
     async findMacAddress() {
         try {
             const discoveryStrategy = this.homey.discovery.getStrategy("diskstation_discovery");
@@ -360,7 +328,7 @@ module.exports = class mainDevice extends Homey.Device {
             await this.setValue('alarm_heat', !!temperature_warn);
             await this.setValue('measure_temperature', parseInt(temperature));
             await this.setValue('measure_uptime', parseFloat(hoursMinutes(uptime)));
-            await this.setValue('measure_uptime_days', splitTime(uptime, this.homey.__));
+            await this.setValue('uptime_days', splitTime(uptime, this.homey.__));
             if(disk_usage !== null) await this.setValue('measure_disk_usage', parseInt(disk_usage));
             if(cpu_load !== null) await this.setValue('measure_cpu_usage', parseInt(cpu_load));
             if(ram_load !== null) await this.setValue('measure_ram_usage', parseInt(ram_load));
@@ -470,5 +438,43 @@ module.exports = class mainDevice extends Homey.Device {
 
     onDeleted() {
         this.clearIntervals();
+    }
+
+    // ------------- Capabilities -------------
+    async checkCapabilities() {
+        const driverManifest = this.driver.manifest;
+        let driverCapabilities = driverManifest.capabilities;
+        const deviceCapabilities = this.getCapabilities();
+
+        this.homey.app.log(`[Device] ${this.getName()} - checkCapabilities for`, driverManifest.id);
+        this.homey.app.log(`[Device] ${this.getName()} - Found capabilities =>`, deviceCapabilities);
+
+
+        await this.updateCapabilities(driverCapabilities, deviceCapabilities);
+
+        return;
+    }
+
+    async updateCapabilities(driverCapabilities, deviceCapabilities) {
+        try {
+            const newC = driverCapabilities.filter((d) => !deviceCapabilities.includes(d));
+            const oldC = deviceCapabilities.filter((d) => !driverCapabilities.includes(d));
+
+            this.homey.app.log(`[Device] ${this.getName()} - Got old capabilities =>`, oldC);
+            this.homey.app.log(`[Device] ${this.getName()} - Got new capabilities =>`, newC);
+
+            oldC.forEach((c) => {
+                this.homey.app.log(`[Device] ${this.getName()} - updateCapabilities => Remove `, c);
+                this.removeCapability(c).catch(e => this.homey.app.log(e));
+            });
+            await sleep(2000);
+            newC.forEach((c) => {
+                this.homey.app.log(`[Device] ${this.getName()} - updateCapabilities => Add `, c);
+                this.addCapability(c).catch(e => this.homey.app.log(e));
+            });
+            await sleep(2000);
+        } catch (error) {
+            this.homey.app.log(error);
+        }
     }
 }
