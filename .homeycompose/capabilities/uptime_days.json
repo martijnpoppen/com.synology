@@ -1,0 +1,17 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Up-Time",
+    "nl": "Online tijd",
+    "de": "Laufzeit"
+  },
+  "units": {
+    "en": "Hours",
+    "nl": "Uur",
+    "de": "Stunden"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/stopwatch.svg"
+}

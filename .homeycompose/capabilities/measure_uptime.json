@@ -1,0 +1,25 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Up-Time",
+    "nl": "Online tijd",
+    "de": "Laufzeit"
+  },
+  "units": {
+    "en": "Hours",
+    "nl": "Uur",
+    "de": "Stunden"
+  },
+  "insights": true,
+  "desc": {
+    "en": "Up-Time in hours",
+    "nl": "Online tijd in uren",
+    "de": "Laufzeit in Stunden"
+  },
+  "chartType": "spline",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/stopwatch.svg"
+}

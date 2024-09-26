@@ -1,0 +1,25 @@
+{
+  "type": "number",
+  "title": {
+    "en": "CPU Usage",
+    "nl": "CPU gebruik",
+    "de": "CPU-Auslastung"
+  },
+  "units": {
+    "en": "%",
+    "nl": "%",
+    "de": "%"
+  },
+  "insights": true,
+  "desc": {
+    "en": "CPU Usage in %",
+    "nl": "CPU gebruik in %",
+    "de": "CPU-Auslastung in %"
+  },
+  "chartType": "spline",
+  "decimals": 1,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/cpu-fill.svg"
+}

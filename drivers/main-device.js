@@ -161,7 +161,7 @@ module.exports = class mainDevice extends Homey.Device {
            this.setStoreValue('rebooting', true);
            this.setValue('action_reboot', false);
 
-           await this._synoClient.shutdown();
+           await this._synoClient.reboot();
            
            this.setUnavailable(this.homey.__("diskstation.reboot"));
 
