@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Upload File",
+    "nl": "Bestand uploaden",
+    "de": "Datei hochladen"
+  },
+  "getable": false,
+  "setable": true,
+  "uiComponent": null
+}

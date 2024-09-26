@@ -1,0 +1,192 @@
+{
+  "class": "homealarm",
+  "connectivity": [
+    "lan",
+    "cloud"
+  ],
+  "capabilities": [
+    "onoff",
+    "onoff_override",
+    "action_reboot",
+    "action_update_data",
+    "action_upload_file",
+    "alarm_heat",
+    "measure_temperature",
+    "measure_uptime",
+    "uptime_days",
+    "measure_cpu_usage",
+    "measure_ram_usage",
+    "measure_disk_usage"
+  ],
+  "energy": {
+    "approximation": {
+      "usageOn": 30,
+      "usageOff": 1
+    }
+  },
+  "name": {
+    "en": "Synology DiskStation",
+    "nl": "Synology DiskStation",
+    "de": "Synology DiskStation"
+  },
+  "images": {
+    "large": "drivers/DiskStation/assets/images/large.png",
+    "small": "drivers/DiskStation/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "login_synology"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "prev": "login_synology",
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "General settings",
+        "nl": "Algemene instellingen",
+        "de": "Allgemeine Einstellungen"
+      },
+      "children": [
+        {
+          "id": "override_onoff",
+          "type": "checkbox",
+          "label": {
+            "en": "Always on",
+            "nl": "Altijd aan",
+            "de": "Immer an"
+          },
+          "value": false
+        },
+        {
+          "id": "update_interval",
+          "type": "number",
+          "label": {
+            "en": "Update interval",
+            "nl": "Update interval",
+            "de": "Update Intervall"
+          },
+          "min": 30,
+          "max": 3600,
+          "units": {
+            "en": "seconds",
+            "nl": "seconden",
+            "de": "Sekunden"
+          },
+          "value": 120
+        },
+        {
+          "id": "enable_interval",
+          "type": "checkbox",
+          "label": {
+            "en": "Enable automatic data",
+            "nl": "Automatische gegevens ophalen",
+            "de": "Daten automatisch abrufen"
+          },
+          "value": true
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Login settings",
+        "nl": "Login instellingen",
+        "de": "Login Einstellungen"
+      },
+      "children": [
+        {
+          "id": "mac",
+          "type": "text",
+          "label": {
+            "en": "MAC Addres",
+            "nl": "MAC Adres",
+            "de": "MAC-Adresse"
+          },
+          "value": ""
+        },
+        {
+          "id": "ip",
+          "type": "text",
+          "label": {
+            "en": "IP Address",
+            "nl": "IP Adres",
+            "de": "IP-Adresse"
+          },
+          "value": ""
+        },
+        {
+          "id": "port",
+          "type": "number",
+          "label": {
+            "en": "Port",
+            "nl": "Poort",
+            "de": "Port"
+          },
+          "value": 5000
+        },
+        {
+          "id": "sftp_port",
+          "type": "number",
+          "label": {
+            "en": "SFTP Port",
+            "nl": "SFTP Poort",
+            "de": "SFTP Port"
+          },
+          "value": 22
+        },
+        {
+          "id": "secure",
+          "type": "checkbox",
+          "label": {
+            "en": "SSL",
+            "nl": "SSL",
+            "de": "SSL"
+          },
+          "value": false
+        },
+        {
+          "id": "user",
+          "type": "text",
+          "label": {
+            "en": "User",
+            "nl": "Gebruiker",
+            "de": "Benutzer"
+          },
+          "value": ""
+        },
+        {
+          "id": "passwd",
+          "type": "password",
+          "label": {
+            "en": "Password",
+            "nl": "Wachtwoord",
+            "de": "Passwort"
+          },
+          "value": ""
+        },
+        {
+          "id": "debug",
+          "type": "checkbox",
+          "label": {
+            "en": "Debug Logs",
+            "nl": "Debug Logs",
+            "de": "Debug Logs"
+          },
+          "value": false
+        }
+      ]
+    }
+  ]
+}

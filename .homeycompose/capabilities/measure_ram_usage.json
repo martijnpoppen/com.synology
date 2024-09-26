@@ -1,0 +1,25 @@
+{
+  "type": "number",
+  "title": {
+    "en": "RAM Usage",
+    "nl": "RAM gebruik",
+    "de": "RAM-Auslastung"
+  },
+  "units": {
+    "en": "%",
+    "nl": "%",
+    "de": "%"
+  },
+  "insights": true,
+  "desc": {
+    "en": "RAM Usage in %",
+    "nl": "RAM gebruik in %",
+    "de": "RAM-Auslastung in %"
+  },
+  "chartType": "spline",
+  "decimals": 1,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/lightning-charge.svg"
+}

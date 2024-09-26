@@ -1,4 +1,5 @@
 {
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.synology",
   "version": "1.10.3",
   "compatibility": ">=5.0.0",
@@ -77,19 +78,360 @@
   "source": "https://github.com/martijnpoppen/com.synology",
   "homeyCommunityTopicId": 49744,
   "support": "https://community.athom.com/t/app-synology-diskstation/49744",
-  "discovery": {
-    "diskstation_discovery": {
-      "type": "mdns-sd",
-      "mdns-sd": {
-        "protocol": "tcp",
-        "name": "_http"
+  "flow": {
+    "triggers": [
+      {
+        "id": "measure_uptime_changed",
+        "title": {
+          "en": "The uptime has changed",
+          "nl": "De online tijd is veranderd",
+          "de": "Die Laufzeit hat sich geändert"
+        },
+        "tokens": [
+          {
+            "name": "measure_uptime",
+            "title": {
+              "en": "Up-Time",
+              "nl": "Online tijd",
+              "de": "Laufzeit"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
       },
-      "id": "{{txt.id}}"
-    }
+      {
+        "id": "measure_disk_usage_changed",
+        "title": {
+          "en": "Disk Usage has changed",
+          "nl": "Schijf gebruik is veranderd",
+          "de": "Festplattenbelegung hat sich verändert"
+        },
+        "tokens": [
+          {
+            "name": "measure_disk_usage",
+            "title": {
+              "en": "Disk Usage",
+              "nl": "Schijf gebruik",
+              "de": "Festplattenbelegung"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "measure_CPU_usage_changed",
+        "title": {
+          "en": "CPU Usage has changed",
+          "nl": "CPU gebruik is veranderd",
+          "de": "CPU-Auslastung hat sich verändert"
+        },
+        "tokens": [
+          {
+            "name": "measure_cpu_usage",
+            "title": {
+              "en": "CPU Usage",
+              "nl": "CPU gebruik",
+              "de": "CPU-Auslastung"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "measure_ram_usage_changed",
+        "title": {
+          "en": "RAM Usage has changed",
+          "nl": "RAM gebruik is veranderd",
+          "de": "RAM-Auslastung hat sich verändert"
+        },
+        "tokens": [
+          {
+            "name": "measure_ram_usage",
+            "title": {
+              "en": "RAM Usage",
+              "nl": "RAM gebruik",
+              "de": "RAM-Auslastung"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "onoff_true",
+        "highlight": true,
+        "title": {
+          "en": "Turned on",
+          "nl": "Aangezet",
+          "de": "Angeschaltet",
+          "fr": "Activé",
+          "it": "Attivato",
+          "sv": "Aktiverad",
+          "no": "Slått på",
+          "es": "Encendido",
+          "da": "Tændt",
+          "ru": "Включено",
+          "pl": "Włączone",
+          "ko": "켜짐"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "onoff_false",
+        "highlight": true,
+        "title": {
+          "en": "Turned off",
+          "nl": "Uitgezet",
+          "de": "Ausgeschaltet",
+          "fr": "Désactivé",
+          "it": "Disattivato",
+          "sv": "Inaktiverad",
+          "no": "Slått av",
+          "es": "Apagado",
+          "da": "Slukket",
+          "ru": "Выключено",
+          "pl": "Wyłączone",
+          "ko": "꺼짐"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "on",
+        "title": {
+          "en": "Is turned !{{on|off}}",
+          "nl": "Is !{{aan|uit}}",
+          "de": "Ist !{{an|aus}}",
+          "fr": "Est !{{activé|désactivé}}",
+          "it": "È !{{attivato|disattivato}}",
+          "sv": "Är !{{på|av}}",
+          "no": "Er slått !{{på|av}}",
+          "es": "Está !{{encendido|apagado}}",
+          "da": "Er !{{tændt|slukket}}",
+          "ru": "!{{Вкл.|Выкл.}}",
+          "pl": "Jest !{{włączone|wyłączone}}",
+          "ko": "이(가) !{{켜짐|꺼짐}}"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "action_reboot_flow",
+        "title": {
+          "en": "Reboot",
+          "nl": "Herstarten",
+          "de": "Neustarten"
+        },
+        "titleFormatted": {
+          "en": "Reboot",
+          "nl": "Herstarten",
+          "de": "Neustarten"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "action_update_data_flow",
+        "title": {
+          "en": "Update data",
+          "nl": "Data updaten",
+          "de": "Daten aktualisieren"
+        },
+        "titleFormatted": {
+          "en": "Update data",
+          "nl": "Data updaten",
+          "de": "Daten aktualisieren"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "action_upload_file_flow",
+        "title": {
+          "en": "Upload File",
+          "nl": "Bestand uploaden",
+          "de": "Datei hochladen"
+        },
+        "titleFormatted": {
+          "en": "[[droptoken]] Upload File",
+          "nl": "[[droptoken]] Bestand uploaden",
+          "de": "[[droptoken]] Datei hochladen"
+        },
+        "droptoken": [
+          "image",
+          "string"
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "action_upload_file_flow_hashed",
+        "title": {
+          "en": "Upload File (hashed filename)",
+          "nl": "Bestand uploaden (hashed bestandsnaam)",
+          "de": "Datei hochladen (hashed Dateiname)"
+        },
+        "titleFormatted": {
+          "en": "[[droptoken]] Upload File (hashed filename)",
+          "nl": "[[droptoken]] Bestand uploaden (hashed bestandsnaam)",
+          "de": "[[droptoken]] Datei hochladen (hashed Dateiname)"
+        },
+        "droptoken": [
+          "image",
+          "string"
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "on",
+        "highlight": true,
+        "title": {
+          "en": "Turn on",
+          "nl": "Zet aan",
+          "de": "Einschalten",
+          "fr": "Activer",
+          "it": "Attiva",
+          "sv": "Aktivera",
+          "no": "Slå på",
+          "es": "Encender",
+          "da": "Tændt",
+          "ru": "Включить",
+          "pl": "Włącz",
+          "ko": "켜기"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "off",
+        "highlight": true,
+        "title": {
+          "en": "Turn off",
+          "nl": "Zet uit",
+          "de": "Ausschalten",
+          "fr": "Désactiver",
+          "it": "Disattiva",
+          "sv": "Stäng av",
+          "no": "Slå av",
+          "es": "Apagar",
+          "da": "Slukket",
+          "ru": "Выключить",
+          "pl": "Wyłącz",
+          "ko": "끄기"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "toggle",
+        "title": {
+          "en": "Toggle on or off",
+          "nl": "Schakel aan of uit",
+          "de": "Ein- oder ausschalten",
+          "fr": "Alterner activé ou désactivé",
+          "it": "Attiva o disattiva",
+          "sv": "Växla på och av",
+          "no": "Veksle mellom på og av",
+          "es": "Encender o apagar",
+          "da": "Tænd eller sluk",
+          "ru": "Переключатель включить/выключить",
+          "pl": "Przełącz na wł. lub wył.",
+          "ko": "켬 또는 끔 토글"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      }
+    ]
   },
   "drivers": [
     {
-      "id": "DiskStation",
       "class": "homealarm",
       "connectivity": [
         "lan",
@@ -279,212 +621,144 @@
             }
           ]
         }
-      ]
+      ],
+      "id": "DiskStation"
     }
   ],
-  "flow": {
-    "triggers": [
-      {
-        "id": "measure_uptime_changed",
-        "title": {
-          "en": "The uptime has changed",
-          "nl": "De online tijd is veranderd",
-          "de": "Die Laufzeit hat sich geändert"
-        },
-        "tokens": [
-          {
-            "name": "measure_uptime",
-            "title": {
-              "en": "Up-Time",
-              "nl": "Online tijd",
-              "de": "Laufzeit"
-            },
-            "type": "number",
-            "example": 99
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=DiskStation&capabilities=measure_uptime"
-          }
-        ]
-      },
-      {
-        "id": "measure_disk_usage_changed",
-        "title": {
-          "en": "Disk Usage has changed",
-          "nl": "Schijf gebruik is veranderd",
-          "de": "Festplattenbelegung hat sich verändert"
-        },
-        "tokens": [
-          {
-            "name": "measure_disk_usage",
-            "title": {
-              "en": "Disk Usage",
-              "nl": "Schijf gebruik",
-              "de": "Festplattenbelegung"
-            },
-            "type": "number",
-            "example": 99
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=DiskStation&capabilities=measure_disk_usage"
-          }
-        ]
-      },
-      {
-        "id": "measure_CPU_usage_changed",
-        "title": {
-          "en": "CPU Usage has changed",
-          "nl": "CPU gebruik is veranderd",
-          "de": "CPU-Auslastung hat sich verändert"
-        },
-        "tokens": [
-          {
-            "name": "measure_cpu_usage",
-            "title": {
-              "en": "CPU Usage",
-              "nl": "CPU gebruik",
-              "de": "CPU-Auslastung"
-            },
-            "type": "number",
-            "example": 99
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=DiskStation&capabilities=measure_cpu_usage"
-          }
-        ]
-      },
-      {
-        "id": "measure_ram_usage_changed",
-        "title": {
-          "en": "RAM Usage has changed",
-          "nl": "RAM gebruik is veranderd",
-          "de": "RAM-Auslastung hat sich verändert"
-        },
-        "tokens": [
-          {
-            "name": "measure_ram_usage",
-            "title": {
-              "en": "RAM Usage",
-              "nl": "RAM gebruik",
-              "de": "RAM-Auslastung"
-            },
-            "type": "number",
-            "example": 99
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=DiskStation&capabilities=measure_ram_usage"
-          }
-        ]
-      }
-    ],
-    "actions": [
-      {
-        "id": "action_reboot_flow",
-        "title": {
-          "en": "Reboot",
-          "nl": "Herstarten",
-          "de": "Neustarten"
-        },
-        "titleFormatted": {
-          "en": "Reboot",
-          "nl": "Herstarten",
-          "de": "Neustarten"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=DiskStation&capabilities=action_reboot"
-          }
-        ]
-      },
-      {
-        "id": "action_update_data_flow",
-        "title": {
-          "en": "Update data",
-          "nl": "Data updaten",
-          "de": "Daten aktualisieren"
-        },
-        "titleFormatted": {
-          "en": "Update data",
-          "nl": "Data updaten",
-          "de": "Daten aktualisieren"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=DiskStation&capabilities=action_update_data"
-          }
-        ]
-      },
-      {
-        "id": "action_upload_file_flow",
-        "title": {
-          "en": "Upload File",
-          "nl": "Bestand uploaden",
-          "de": "Datei hochladen"
-        },
-        "titleFormatted": {
-          "en": "[[droptoken]] Upload File",
-          "nl": "[[droptoken]] Bestand uploaden",
-          "de": "[[droptoken]] Datei hochladen"
-        },
-        "droptoken": [
-          "image",
-          "string"
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=DiskStation&capabilities=action_upload_file"
-          }
-        ]
-      },
-      {
-        "id": "action_upload_file_flow_hashed",
-        "title": {
-          "en": "Upload File (hashed filename)",
-          "nl": "Bestand uploaden (hashed bestandsnaam)",
-          "de": "Datei hochladen (hashed Dateiname)"
-        },
-        "titleFormatted": {
-          "en": "[[droptoken]] Upload File (hashed filename)",
-          "nl": "[[droptoken]] Bestand uploaden (hashed bestandsnaam)",
-          "de": "[[droptoken]] Datei hochladen (hashed Dateiname)"
-        },
-        "droptoken": [
-          "image",
-          "string"
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=DiskStation&capabilities=action_upload_file"
-          }
-        ]
-      }
-    ]
-  },
   "capabilities": {
+    "action_reboot": {
+      "type": "boolean",
+      "title": {
+        "en": "Reboot",
+        "nl": "Herstarten",
+        "de": "Neustarten"
+      },
+      "getable": false,
+      "setable": true,
+      "uiComponent": "button"
+    },
+    "action_update_data": {
+      "type": "boolean",
+      "title": {
+        "en": "Update data",
+        "nl": "Data updaten",
+        "de": "Daten aktualisieren"
+      },
+      "getable": false,
+      "setable": true,
+      "uiComponent": "button"
+    },
+    "action_upload_file": {
+      "type": "string",
+      "title": {
+        "en": "Upload File",
+        "nl": "Bestand uploaden",
+        "de": "Datei hochladen"
+      },
+      "getable": false,
+      "setable": true,
+      "uiComponent": null
+    },
+    "measure_cpu_usage": {
+      "type": "number",
+      "title": {
+        "en": "CPU Usage",
+        "nl": "CPU gebruik",
+        "de": "CPU-Auslastung"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%",
+        "de": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "CPU Usage in %",
+        "nl": "CPU gebruik in %",
+        "de": "CPU-Auslastung in %"
+      },
+      "chartType": "spline",
+      "decimals": 1,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/cpu-fill.svg"
+    },
+    "measure_disk_usage": {
+      "type": "number",
+      "title": {
+        "en": "Disk Usage",
+        "nl": "Schijf gebruik",
+        "de": "Festplattenbelegung"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%",
+        "de": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Disk Usage in %",
+        "nl": "Schijf gebruik in %",
+        "de": "Festplattenbelegung in %"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/disc-fill.svg"
+    },
+    "measure_ram_usage": {
+      "type": "number",
+      "title": {
+        "en": "RAM Usage",
+        "nl": "RAM gebruik",
+        "de": "RAM-Auslastung"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%",
+        "de": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "RAM Usage in %",
+        "nl": "RAM gebruik in %",
+        "de": "RAM-Auslastung in %"
+      },
+      "chartType": "spline",
+      "decimals": 1,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/lightning-charge.svg"
+    },
+    "measure_uptime": {
+      "type": "number",
+      "title": {
+        "en": "Up-Time",
+        "nl": "Online tijd",
+        "de": "Laufzeit"
+      },
+      "units": {
+        "en": "Hours",
+        "nl": "Uur",
+        "de": "Stunden"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Up-Time in hours",
+        "nl": "Online tijd in uren",
+        "de": "Laufzeit in Stunden"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/stopwatch.svg"
+    },
     "onoff": {
       "type": "boolean",
       "title": {
@@ -520,63 +794,7 @@
         }
       },
       "uiComponent": "toggle",
-      "uiQuickAction": false,
-      "$flow": {
-        "triggers": [
-          {
-            "id": "onoff_true",
-            "title": {
-              "en": "Turned on",
-              "nl": "Aangezet ",
-              "de": "Angeschaltet"
-            }
-          },
-          {
-            "id": "onoff_false",
-            "title": {
-              "en": "Turned off",
-              "nl": "Uitgezet",
-              "de": "Ausgeschaltet"
-            }
-          }
-        ],
-        "conditions": [
-          {
-            "id": "on",
-            "title": {
-              "en": "Is turned !{{on|off}}",
-              "nl": "Is !{{aan|uit}}",
-              "de": "Ist !{{an|aus}}"
-            }
-          }
-        ],
-        "actions": [
-          {
-            "id": "on",
-            "title": {
-              "en": "Turn on",
-              "nl": "Zet aan",
-              "de": "Einschalten"
-            }
-          },
-          {
-            "id": "off",
-            "title": {
-              "en": "Turn off",
-              "nl": "Zet uit",
-              "de": "Ausschalten"
-            }
-          },
-          {
-            "id": "toggle",
-            "title": {
-              "en": "Toggle on or off",
-              "nl": "Schakel aan of uit",
-              "de": "Ein- oder ausschalten"
-            }
-          }
-        ]
-      }
+      "uiQuickAction": false
     },
     "onoff_override": {
       "type": "boolean",
@@ -589,31 +807,6 @@
       "setable": true,
       "uiComponent": null,
       "uiQuickAction": true
-    },
-    "measure_uptime": {
-      "type": "number",
-      "title": {
-        "en": "Up-Time",
-        "nl": "Online tijd",
-        "de": "Laufzeit"
-      },
-      "units": {
-        "en": "Hours",
-        "nl": "Uur",
-        "de": "Stunden"
-      },
-      "insights": true,
-      "desc": {
-        "en": "Up-Time in hours",
-        "nl": "Online tijd in uren",
-        "de": "Laufzeit in Stunden"
-      },
-      "chartType": "spline",
-      "decimals": 2,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "assets/icons/stopwatch.svg"
     },
     "uptime_days": {
       "type": "string",
@@ -631,114 +824,16 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "assets/icons/stopwatch.svg"
-    },
-    "measure_disk_usage": {
-      "type": "number",
-      "title": {
-        "en": "Disk Usage",
-        "nl": "Schijf gebruik",
-        "de": "Festplattenbelegung"
+    }
+  },
+  "discovery": {
+    "diskstation_discovery": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "protocol": "tcp",
+        "name": "_http"
       },
-      "units": {
-        "en": "%",
-        "nl": "%",
-        "de": "%"
-      },
-      "insights": true,
-      "desc": {
-        "en": "Disk Usage in %",
-        "nl": "Schijf gebruik in %",
-        "de": "Festplattenbelegung in %"
-      },
-      "chartType": "spline",
-      "decimals": 2,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "assets/icons/disc-fill.svg"
-    },
-    "measure_cpu_usage": {
-      "type": "number",
-      "title": {
-        "en": "CPU Usage",
-        "nl": "CPU gebruik",
-        "de": "CPU-Auslastung"
-      },
-      "units": {
-        "en": "%",
-        "nl": "%",
-        "de": "%"
-      },
-      "insights": true,
-      "desc": {
-        "en": "CPU Usage in %",
-        "nl": "CPU gebruik in %",
-        "de": "CPU-Auslastung in %"
-      },
-      "chartType": "spline",
-      "decimals": 1,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "assets/icons/cpu-fill.svg"
-    },
-    "measure_ram_usage": {
-      "type": "number",
-      "title": {
-        "en": "RAM Usage",
-        "nl": "RAM gebruik",
-        "de": "RAM-Auslastung"
-      },
-      "units": {
-        "en": "%",
-        "nl": "%",
-        "de": "%"
-      },
-      "insights": true,
-      "desc": {
-        "en": "RAM Usage in %",
-        "nl": "RAM gebruik in %",
-        "de": "RAM-Auslastung in %"
-      },
-      "chartType": "spline",
-      "decimals": 1,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "assets/icons/lightning-charge.svg"
-    },
-    "action_reboot": {
-      "type": "boolean",
-      "title": {
-        "en": "Reboot",
-        "nl": "Herstarten",
-        "de": "Neustarten"
-      },
-      "getable": false,
-      "setable": true,
-      "uiComponent": "button"
-    },
-    "action_update_data": {
-      "type": "boolean",
-      "title": {
-        "en": "Update data",
-        "nl": "Data updaten",
-        "de": "Daten aktualisieren"
-      },
-      "getable": false,
-      "setable": true,
-      "uiComponent": "button"
-    },
-    "action_upload_file": {
-      "type": "string",
-      "title": {
-        "en": "Upload File",
-        "nl": "Bestand uploaden",
-        "de": "Datei hochladen"
-      },
-      "getable": false,
-      "setable": true,
-      "uiComponent": null
+      "id": "{{txt.id}}"
     }
   }
 }

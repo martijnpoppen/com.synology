@@ -1,0 +1,25 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Disk Usage",
+    "nl": "Schijf gebruik",
+    "de": "Festplattenbelegung"
+  },
+  "units": {
+    "en": "%",
+    "nl": "%",
+    "de": "%"
+  },
+  "insights": true,
+  "desc": {
+    "en": "Disk Usage in %",
+    "nl": "Schijf gebruik in %",
+    "de": "Festplattenbelegung in %"
+  },
+  "chartType": "spline",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/disc-fill.svg"
+}

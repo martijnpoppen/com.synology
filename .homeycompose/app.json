@@ -1,0 +1,80 @@
+{
+  "id": "com.synology",
+  "version": "1.10.3",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "brandColor": "#000000",
+  "name": {
+    "en": "Synology",
+    "nl": "Synology",
+    "de": "Synology"
+  },
+  "description": {
+    "en": "The next step in data storage starts here",
+    "nl": "De volgende stap in gegevensbeheer begint hier",
+    "de": "Der nächste Schritt der Datenspeicherung beginnt hier"
+  },
+  "tags": {
+    "en": [
+      "NAS",
+      "Storage",
+      "FTP",
+      "Webdav",
+      "Surveillance",
+      "Photo",
+      "Video",
+      "WOL",
+      "Wake on Lan"
+    ]
+  },
+  "category": [
+    "security"
+  ],
+  "images": {
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "author": {
+    "name": "Martijn Poppen",
+    "email": "synology@martijnpoppen.nl"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Martijn Poppen",
+        "email": "synology@martijnpoppen.nl"
+      },
+      {
+        "name": "Bas van der Ploeg (device icons)",
+        "email": "bas@basvanderploeg.nl"
+      }
+    ],
+    "translators": [
+      {
+        "name": "🇬🇧 Martijn Poppen"
+      },
+      {
+        "name": "🇳🇱 Martijn Poppen"
+      },
+      {
+        "name": "🇩🇪 Dirk Göbel"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "martijnpoppen"
+      },
+      "bunq": {
+        "username": "martijnpoppen"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://community.athom.com/t/app-synology-diskstation/49744"
+  },
+  "source": "https://github.com/martijnpoppen/com.synology",
+  "homeyCommunityTopicId": 49744,
+  "support": "https://community.athom.com/t/app-synology-diskstation/49744"
+}

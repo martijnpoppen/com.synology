@@ -1,0 +1,12 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Turned on",
+    "nl": "Aangezet",
+    "de": "Eingeschaltet"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": null,
+  "uiQuickAction": true
+}
