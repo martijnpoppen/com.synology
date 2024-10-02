@@ -243,18 +243,42 @@
       {
         "id": "on",
         "title": {
-          "en": "Is turned !{{on|off}}",
-          "nl": "Is !{{aan|uit}}",
-          "de": "Ist !{{an|aus}}",
-          "fr": "Est !{{activé|désactivé}}",
-          "it": "È !{{attivato|disattivato}}",
-          "sv": "Är !{{på|av}}",
-          "no": "Er slått !{{på|av}}",
-          "es": "Está !{{encendido|apagado}}",
-          "da": "Er !{{tændt|slukket}}",
-          "ru": "!{{Вкл.|Выкл.}}",
-          "pl": "Jest !{{włączone|wyłączone}}",
-          "ko": "이(가) !{{켜짐|꺼짐}}"
+          "en": "Is turned on",
+          "nl": "Is aangezet",
+          "de": "Ist eingeschaltet",
+          "fr": "Est activé",
+          "it": "È attivato",
+          "sv": "Är på",
+          "no": "Er slått på",
+          "es": "Está encendido",
+          "da": "Er tændt",
+          "ru": "Включено",
+          "pl": "Jest włączone",
+          "ko": "켜짐"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DiskStation"
+          }
+        ]
+      },
+      {
+        "id": "off",
+        "title": {
+          "en": "Is turned off",
+          "nl": "Is uitgezet",
+          "de": "Ist ausgeschaltet",
+          "fr": "Est désactivé",
+          "it": "È disattivato",
+          "sv": "Är av",
+          "no": "Er slått av",
+          "es": "Está apagado",
+          "da": "Er slukket",
+          "ru": "Выключено",
+          "pl": "Jest wyłączone",
+          "ko": "꺼짐"
         },
         "args": [
           {
@@ -366,7 +390,7 @@
           "sv": "Aktivera",
           "no": "Slå på",
           "es": "Encender",
-          "da": "Tændt",
+          "da": "Tænd",
           "ru": "Включить",
           "pl": "Włącz",
           "ko": "켜기"
@@ -391,7 +415,7 @@
           "sv": "Stäng av",
           "no": "Slå av",
           "es": "Apagar",
-          "da": "Slukket",
+          "da": "Sluk",
           "ru": "Выключить",
           "pl": "Wyłącz",
           "ko": "끄기"
@@ -416,8 +440,8 @@
           "no": "Veksle mellom på og av",
           "es": "Encender o apagar",
           "da": "Tænd eller sluk",
-          "ru": "Переключатель включить/выключить",
-          "pl": "Przełącz na wł. lub wył.",
+          "ru": "Переключить включить/выключить",
+          "pl": "Przełącz na włączone lub wyłączone",
           "ko": "켬 또는 끔 토글"
         },
         "args": [
