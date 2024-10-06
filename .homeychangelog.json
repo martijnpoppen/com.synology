@@ -196,5 +196,8 @@
   },
   "1.10.5": {
     "en": "FIX: actions and conditions for HP23 firmware 12.2.0"
+  },
+  "1.10.6": {
+    "en": "FIX: actions and conditions for HP23 firmware 12.2.0"
   }
 }
