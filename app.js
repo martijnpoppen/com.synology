@@ -2,6 +2,7 @@
 
 const Homey = require("homey");
 const flowActions = require('./lib/flows/actions');
+const flowConditions = require('./lib/flows/conditions');
 
 let _devices = [];
 
@@ -21,6 +22,7 @@ class App extends Homey.App {
     this.debugLogs = false;
 
     await flowActions.init(this.homey);
+    await flowConditions.init(this.homey);;
   }
 
   // ---------------------------- GETTERS/SETTERS ----------------------------------

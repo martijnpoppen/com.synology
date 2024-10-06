@@ -190,5 +190,11 @@
   },
   "1.10.3": {
     "en": "FIX: some cards had wrong type, causing issue in Homey-Core"
+  },
+  "1.10.4": {
+    "en": "FIX: reboot | FIX: capability override for new Homey firmware"
+  },
+  "1.10.5": {
+    "en": "FIX: actions and conditions for HP23 firmware 12.2.0"
   }
 }
