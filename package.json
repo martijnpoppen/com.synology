@@ -8,8 +8,6 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
-    "fs": "^0.0.1-security",
-    "https": "^1.0.0",
     "ssh2-sftp-client": "^7.0.3",
     "wake_on_lan": "0.0.4",
     "winston": "^3.3.3"
