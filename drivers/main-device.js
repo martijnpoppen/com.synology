@@ -355,23 +355,25 @@ module.exports = class mainDevice extends Homey.Device {
             let used = 0;
             let total = 0;
 
-            if(data.vol_info) {
-                if (settings.version < 6) {
-                    for (var i = data.volumes.length; i--;) {
-                        used += data.volumes[i].used;
-                        total += data.volumes[i].total;
-                    }
-                } else if (settings.version >= 6) {
-                    for (var i = data.vol_info.length; i--;) {
-                        used += data.vol_info[i].used_size;
-                        total += data.vol_info[i].total_size;
-                    }                
-                } 
+            // DSM returns sizes as strings (e.g. '2060554240'), so convert them to numbers
+            // before summing. Otherwise `+=` concatenates the strings and the usage ends up as 0.
+            if (settings.version < 6 && Array.isArray(data.volumes)) {
+                for (const volume of data.volumes) {
+                    used += Number(volume.used) || 0;
+                    total += Number(volume.total) || 0;
+                }
+            } else if (Array.isArray(data.vol_info)) {
+                for (const volume of data.vol_info) {
+                    used += Number(volume.used_size) || 0;
+                    total += Number(volume.total_size) || 0;
+                }
             } else {
                 return null;
             }
-           
 
+            if (!total) {
+                return null;
+            }
 
             const usage = Math.round(used / total * 100);
             this.homey.app.log(`[Device] ${this.getName()} - setDiskUsage`, used, total, usage);
