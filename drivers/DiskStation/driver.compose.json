@@ -177,6 +177,16 @@
           "value": ""
         },
         {
+          "id": "otp_code",
+          "type": "password",
+          "label": {
+            "en": "2FA Code",
+            "nl": "2FA Code",
+            "de": "2FA Code"
+          },
+          "value": ""
+        },
+        {
           "id": "debug",
           "type": "checkbox",
           "label": {

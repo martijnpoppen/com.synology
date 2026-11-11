@@ -199,5 +199,8 @@
   },
   "1.10.6": {
     "en": "FIX: actions and conditions for HP23 firmware 12.2.0"
+  },
+  "1.10.7": {
+    "en": "ADD: OTP code to device settings"
   }
 }
