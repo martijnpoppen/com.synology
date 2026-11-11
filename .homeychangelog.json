@@ -202,5 +202,8 @@
   },
   "1.10.7": {
     "en": "ADD: OTP code to device settings"
+  },
+  "1.10.8": {
+    "en": "FIX: disk usage always showing 0% | FIX: error handling for failed requests | OPT: dependency updates (axios)"
   }
 }
